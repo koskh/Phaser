@@ -1,30 +1,29 @@
-import 'phaser';
+import { Boot } from './scenes/Boot';
+// import { Game as MainGame } from './scenes/Game';
+// import { GameOver } from './scenes/GameOver';
+import { MainMenu } from './scenes/MainMenu';
+import { Preloader } from './scenes/Preloader';
 
-class PlayGame extends Phaser.Scene {
-    image: Phaser.GameObjects.Image;
-    constructor() {
-        super("PlayGame");
-    }
-    preload(): void {
-        this.load.image('logo', 'assets/phaser-logo.png');
-    }
-    create(): void {
-        this.image = this.add.image(400, 300, 'logo');
-    }
-    update(): void {
-        this.image.rotation += 0.01;
-    }
-}
+import { Game, Types } from "phaser";
 
-let configObject: Phaser.Types.Core.GameConfig = {
+
+const config: Types.Core.GameConfig = {
+    type: Phaser.AUTO,
+    width: 1024,
+    height: 768,
+    parent: 'game-container',
+    backgroundColor: '#028af8',
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        parent: 'thegame',
-        width: 800,
-        height: 600
+        autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: PlayGame
+    scene: [
+        Boot,
+        Preloader,
+        MainMenu,
+        // MainGame,
+        // GameOver
+    ]
 };
 
-new Phaser.Game(configObject);
+export default new Game(config);
