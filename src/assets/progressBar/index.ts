@@ -12,7 +12,8 @@ const innerBarOffset = progressBarOuterProps.width / 2 - innerBarPadding;
 export const progressBarInnerProps = {
   x: progressBarOuterProps.x - innerBarOffset,
   y: progressBarOuterProps.y,
-  width: 4, // initial width
+  initialWidth: 1,
+  maxWidthWidth: progressBarOuterProps.width - innerBarPadding * 2,
   height: progressBarOuterProps.height - 2,
   color: progressBarOuterProps.color,
 };

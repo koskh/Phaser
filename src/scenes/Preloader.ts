@@ -27,13 +27,13 @@ export class Preloader extends Scene {
     const progressBar = this.add.rectangle(
       progressBarInnerProps.x,
       progressBarInnerProps.y,
-      progressBarInnerProps.width,
+      progressBarInnerProps.initialWidth,
       progressBarInnerProps.height,
       progressBarInnerProps.color,
     );
 
     this.load.on('progress', (progress: number) => {
-      progressBar.width = 4 + 460 * progress;
+      progressBar.width = progressBarInnerProps.maxWidthWidth * progress;
     });
   }
 
