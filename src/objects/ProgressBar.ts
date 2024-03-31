@@ -1,3 +1,4 @@
+// TODO: make as Phaser.Scene or Phaser.Sprite class
 export const progressBarOuterProps = {
   x: 512,
   y: 384,
