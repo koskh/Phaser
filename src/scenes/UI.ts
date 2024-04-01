@@ -24,11 +24,11 @@ export class UI extends Scene {
     onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateAttempt, this);
   }
 
-  updateCount({count}: IGameState) {
+  updateCount({ count }: IGameState) {
     this.labelCount.text = `Count: ${count}`;
   }
 
-  updateAttempt({attempts}: IGameState) {
+  updateAttempt({ attempts }: IGameState) {
     this.labelAttempt.text = `Attemts: ${attempts}`;
   }
 }

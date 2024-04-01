@@ -3,7 +3,8 @@ import { EAssets } from '../assets';
 
 import Tile from '../objects/Tile';
 import { emitEvent, onEvent } from '../utilities/EventsCenter';
-import { updateCount } from '../state/gameState';
+
+// import { updateCount } from '../state/gameControllers';
 
 export class Game extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
