@@ -14,12 +14,11 @@ export function populateGameBoard(
   variations: number,
 ): void {
   const board = populateGrid(rows, cols, variations);
-
   gameState.setState({ ...gameState.getState(), board });
-  emitEvent(EApplicationEvents.GAME_STATE_UPDATED, getGameState());
+  // emitEvent(EApplicationEvents.GAME_STATE_UPDATED, getGameState());
 }
 
 export function updateCount(newCount: number): void {
   gameState.setState({ ...gameState.getState(), count: newCount });
-  emitEvent(EApplicationEvents.GAME_STATE_UPDATED, getGameState());
+  // emitEvent(EApplicationEvents.GAME_STATE_UPDATED, getGameState());
 }

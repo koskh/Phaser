@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-import { onEvent } from '../utilities/eventsCenter';
+// import { onEvent } from '../utilities/eventsCenter';
 import { EApplicationEvents } from '../utilities/ApplicationEvents';
 
 export class UI extends Scene {
@@ -20,8 +20,8 @@ export class UI extends Scene {
       fontSize: 32,
     });
 
-    onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateCount, this);
-    onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateAttempt, this);
+    // onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateCount, this);
+    // onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateAttempt, this);
   }
 
   updateCount({ count }: IGameState) {
