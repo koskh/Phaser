@@ -1,13 +1,20 @@
 import { GameObjects } from 'phaser';
-import { Game } from '../scenes/Game';
+// import { Game } from '../scenes/Game';
 
 export default class Tile extends GameObjects.Sprite {
+  // row;
+  // col;
   constructor(
-    scene: Game,
+    scene: Phaser.Scene,
     x: number,
     y: number,
-    data: { asset: string | Phaser.Textures.Texture },
+    data: {
+      asset: string | Phaser.Textures.Texture;
+      row?: number;
+      col?: number;
+    },
   ) {
+    // super(scene, x, y, data.asset);
     super(scene, x, y, data.asset);
     // this.data = data;
     // this.row = data.row;
@@ -18,8 +25,8 @@ export default class Tile extends GameObjects.Sprite {
     this.on(
       'pointerdown',
       () => {
-        // @ts-expect-error need right interface
-        this.scene.pickBlock(this);
+        // this.scene.pickBlock(this);
+        console.log('pointerdown', data.row, data.col);
       },
       this,
     );
