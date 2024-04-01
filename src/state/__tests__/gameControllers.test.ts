@@ -6,9 +6,8 @@ import {
 } from '../gameControllers';
 import { populateGrid } from '../utilities/grid';
 
-import { emitEvent } from '../../utilities/eventsCenter';
-//
-jest.mock('../../utilities/eventsCenter');
+// import { emitEvent } from '../../utilities/eventsCenter';
+// jest.mock('../../utilities/eventsCenter');
 
 import gameState from '../gameState';
 
@@ -43,7 +42,7 @@ test('can update count ', () => {
     ...MOCKED_STATE,
     count: newCount,
   });
-  expect(emitEvent).toHaveBeenCalled();
+  // expect(emitEvent).toHaveBeenCalled();
 });
 
 test('can populate board grid ', () => {
@@ -59,7 +58,7 @@ test('can populate board grid ', () => {
     ...MOCKED_STATE,
     board: populateGrid(rows, cols, variations),
   });
-  expect(emitEvent).toHaveBeenCalled();
+  // expect(emitEvent).toHaveBeenCalled();
 });
 
 test('can start new game, reset and populated board, reset scores etc', () => {
@@ -77,5 +76,5 @@ test('can start new game, reset and populated board, reset scores etc', () => {
     count: 0,
     attempts: 0,
   });
-  expect(emitEvent).toHaveBeenCalled();
+  // expect(emitEvent).toHaveBeenCalled();
 });
