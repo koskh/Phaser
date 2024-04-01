@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-import { onEvent } from '../utilities/EventsCenter';
+import { onEvent } from '../utilities/eventsCenter';
 import { EApplicationEvents } from '../utilities/ApplicationEvents';
 
 export class UI extends Scene {

@@ -1,8 +1,8 @@
 import { getGameState, updateCount } from '../gameControllers';
 
-import { emitEvent } from '../../utilities/EventsCenter';
+import { emitEvent } from '../../utilities/eventsCenter';
 //
-jest.mock('../../utilities/EventsCenter');
+jest.mock('../../utilities/eventsCenter');
 
 import gameState from '../gameState';
 //

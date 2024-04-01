@@ -2,7 +2,7 @@ import { Scene } from 'phaser';
 import { EAssets } from '../assets';
 
 import Tile from '../objects/Tile';
-import { emitEvent, onEvent } from '../utilities/EventsCenter';
+import { emitEvent, onEvent } from '../utilities/eventsCenter';
 
 // import { updateCount } from '../state/gameControllers';
 

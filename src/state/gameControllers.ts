@@ -1,4 +1,4 @@
-import { emitEvent } from '../utilities/EventsCenter';
+import { emitEvent } from '../utilities/eventsCenter';
 import { EApplicationEvents } from '../utilities/ApplicationEvents';
 
 import gameState from './gameState';
