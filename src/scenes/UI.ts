@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
-// import { onEvent } from '../utilities/eventsCenter';
 import { EApplicationEvents } from '../utilities/ApplicationEvents';
+import { onEvent } from '../utilities/eventsCenter';
 
 export class UI extends Scene {
   labelCount: Phaser.GameObjects.Text;
@@ -13,15 +13,15 @@ export class UI extends Scene {
   preload() {}
 
   create() {
-    this.labelCount = this.add.text(10, 10, 'Count: 0', {
+    this.labelCount = this.add.text(10, 10, 'Count: _', {
       fontSize: 32,
     });
-    this.labelAttempt = this.add.text(200, 10, 'Attemts: 0', {
+    this.labelAttempt = this.add.text(200, 10, 'Attemts: _', {
       fontSize: 32,
     });
 
-    // onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateCount, this);
-    // onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateAttempt, this);
+    onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateCount, this);
+    onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.updateAttempt, this);
   }
 
   updateCount({ count }: IGameState) {

@@ -14,13 +14,6 @@ export class Game extends Scene {
   }
 
   create() {
-    this.background = this.add.image(
-      this.sys.canvas.width / 2,
-      this.sys.canvas.height / 2,
-      EAssets.BACK_GROUND,
-    );
-    this.background.setAlpha(0.5);
-
     this.scene.run('UI');
     this.scene.run('GameBoard');
 
