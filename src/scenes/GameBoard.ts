@@ -1,7 +1,7 @@
 import { Scene } from 'phaser';
 // import { onEvent } from '../utilities/eventsCenter';
-import {EApplicationEvents} from '../utilities/ApplicationEvents';
-import eventsCenter from '../utilities/eventsCenter';
+import { EApplicationEvents } from '../utilities/ApplicationEvents';
+import { onEvent } from '../utilities/eventsCenter';
 
 export class GameBoard extends Scene {
   constructor() {
@@ -15,7 +15,7 @@ export class GameBoard extends Scene {
   }
 
   create() {
-    // onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.renderScene, this);
+    onEvent(EApplicationEvents.GAME_STATE_UPDATED, this.renderScene, this);
 
     // this.events.on(Phaser.Scenes.Events.BOOT, () => {
     //   console.log('GameBoard');
@@ -23,7 +23,7 @@ export class GameBoard extends Scene {
     //   // emitEvent(EApplicationEvents.GAME_STATE_UPDATED, {});
     // });
 
-    eventsCenter.on('test', () => console.log('!@###'));
+    // eventsCenter.on('test', () => console.log('!@###'));
   }
 
   renderScene({ board }: IGameState) {

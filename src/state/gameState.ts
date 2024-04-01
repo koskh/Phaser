@@ -1,6 +1,3 @@
-import { emitEvent } from '../utilities/eventsCenter';
-import { EApplicationEvents } from '../utilities/ApplicationEvents';
-
 function gameState() {
   let state: IGameState = {
     board: null,
@@ -11,7 +8,6 @@ function gameState() {
     getState: () => state,
     setState: (newState: IGameState) => {
       state = { ...newState };
-      emitEvent(EApplicationEvents.GAME_STATE_UPDATED, newState);
     },
   };
 }

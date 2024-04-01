@@ -2,6 +2,7 @@ import {
   getGameState,
   updateCount,
   populateGameBoard,
+  resetScoreAndLevel,
 } from '../gameControllers';
 import { populateGrid } from '../utilities/grid';
 
@@ -57,6 +58,24 @@ test('can populate board grid ', () => {
   expect(gameState.setState).toHaveBeenLastCalledWith({
     ...MOCKED_STATE,
     board: populateGrid(rows, cols, variations),
+  });
+  expect(emitEvent).toHaveBeenCalled();
+});
+
+test('can start new game, reset and populated board, reset scores etc', () => {
+  const rows = 2,
+    cols = 2,
+    variations = 1;
+
+  resetScoreAndLevel(rows, cols, variations);
+
+  expect(gameState.setState).toHaveBeenCalled();
+
+  expect(gameState.setState).toHaveBeenLastCalledWith({
+    ...MOCKED_STATE,
+    board: populateGrid(rows, cols, variations),
+    count: 0,
+    attempts: 0,
   });
   expect(emitEvent).toHaveBeenCalled();
 });
