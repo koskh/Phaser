@@ -19,7 +19,7 @@ export function onEvent(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function eventEmit(
+export function emitEvent(
   event: string | symbol | EApplicationEvents,
   ...args: any[]
 ) {

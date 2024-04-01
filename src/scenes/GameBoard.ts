@@ -1,5 +1,4 @@
 import { Scene } from 'phaser';
-import { gameStore } from '../state/gameModel';
 
 export class GameBoard extends Scene {
   constructor() {
@@ -7,9 +6,9 @@ export class GameBoard extends Scene {
   }
 
   init() {
-    gameStore.subscribe(() =>
-      console.log('store.getState', gameStore.getState()),
-    );
+    // gameStore.subscribe(() =>
+    //   // console.log('store.getState', gameStore.getState()),
+    // );
   }
 
   preload() {

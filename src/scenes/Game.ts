@@ -1,10 +1,9 @@
 import { Scene } from 'phaser';
 import { EAssets } from '../assets';
 
-// import { eventEmit, onEvent } from '../utilities/EventsCenter';
-import { gameStore, gameController } from '../state/gameModel';
-
 import Tile from '../objects/Tile';
+import { emitEvent, onEvent } from '../utilities/EventsCenter';
+import { updateCount } from '../state/gameState';
 
 export class Game extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -33,9 +32,6 @@ export class Game extends Scene {
 
     // this.scene.run('GameState');
     // this.scene.run('BoardController');
-
-    gameStore.dispatch({ type: 'counter/incremented' });
-    gameStore.dispatch({ type: 'counter/incremented' });
   }
 
   create() {
@@ -56,9 +52,10 @@ export class Game extends Scene {
 
     // // @ts-expect-error dev-only
     // this.input.keyboard.on('keydown-SPACE', () => {
-    //   ++this.count;
+    //   // ++this.count;
     //   // console.log('this.count', this.count);
-    //   eventEmit('update-count', this.count);
+    //   // eventEmit('update-count', this.count);
+    //   updateCount(1000);
     // });
     //
     // this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
