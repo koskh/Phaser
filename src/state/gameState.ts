@@ -6,7 +6,9 @@ function gameState() {
   };
   return {
     getState: () => state,
-    setState: (newState: IGameState) => (state = { ...newState }),
+    setState: (newState: IGameState) => {
+      state = { ...newState };
+    },
   };
 }
 
