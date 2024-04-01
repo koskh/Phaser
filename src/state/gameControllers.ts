@@ -2,21 +2,24 @@ import { emitEvent } from '../utilities/eventsCenter';
 import { EApplicationEvents } from '../utilities/ApplicationEvents';
 
 import gameState from './gameState';
+import { populateGrid } from './utilities/grid';
 
-function getGameState(): IGameState {
+export function getGameState(): IGameState {
   return gameState.getState();
 }
 
-function populateGameBoard(
+export function populateGameBoard(
   rows: number,
   cols: number,
   variations: number,
 ): void {
   const board = populateGrid(rows, cols, variations);
-}
-function updateCount(newCount: number): void {
-  gameState.setState({ ...gameState.getState(), count: newCount });
+
+  gameState.setState({ ...gameState.getState(), board });
   emitEvent(EApplicationEvents.GAME_STATE_UPDATED, getGameState());
 }
 
-export { getGameState, updateCount };
+export function updateCount(newCount: number): void {
+  gameState.setState({ ...gameState.getState(), count: newCount });
+  emitEvent(EApplicationEvents.GAME_STATE_UPDATED, getGameState());
+}

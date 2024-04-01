@@ -1,10 +1,16 @@
-import { getGameState, updateCount } from '../gameControllers';
+import {
+  getGameState,
+  updateCount,
+  populateGameBoard,
+} from '../gameControllers';
+import { populateGrid } from '../utilities/grid';
 
 import { emitEvent } from '../../utilities/eventsCenter';
 //
 jest.mock('../../utilities/eventsCenter');
 
 import gameState from '../gameState';
+
 //
 let MOCKED_STATE: IGameState = {
   board: null,
@@ -35,6 +41,22 @@ test('can update count ', () => {
   expect(gameState.setState).toHaveBeenLastCalledWith({
     ...MOCKED_STATE,
     count: newCount,
+  });
+  expect(emitEvent).toHaveBeenCalled();
+});
+
+test('can populate board grid ', () => {
+  const rows = 2,
+    cols = 2,
+    variations = 1;
+
+  populateGameBoard(rows, cols, variations);
+
+  expect(gameState.setState).toHaveBeenCalled();
+
+  expect(gameState.setState).toHaveBeenLastCalledWith({
+    ...MOCKED_STATE,
+    board: populateGrid(rows, cols, variations),
   });
   expect(emitEvent).toHaveBeenCalled();
 });
