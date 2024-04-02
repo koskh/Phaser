@@ -11,9 +11,7 @@ export function tileToPosition(
 export function positionToTile(
   positionInPixel: IPositionInPixel,
 ): IPositionInTile {
-  const tileX = ((positionInPixel.x - INITIAL_BOARD_SCREEN.WIDTH) /
-    TILE.WIDTH) as number;
-  const tileY = ((positionInPixel.y - INITIAL_BOARD_SCREEN.HEIGHT) /
-    TILE.HEIGHT) as number;
+  const tileX = (positionInPixel.x - INITIAL_BOARD_SCREEN.WIDTH) / TILE.WIDTH;
+  const tileY = (positionInPixel.y - INITIAL_BOARD_SCREEN.HEIGHT) / TILE.HEIGHT;
   return { tileX, tileY };
 }

@@ -1,10 +1,7 @@
 import { ETileType } from '../../config';
 import Tile from '../../objects/Tile';
 
-export function getRandomTilesGrid(): ETileType[][] {
-  const variation = Phaser.Math.Between(0, Object.keys(ETileType).length);
-  // console.log('variation', variation);
-
+export function getPseudoRandomTilesGrid(): ETileType[][] {
   return [
     [ETileType.RED, ETileType.BLUE, ETileType.GREEN],
     [ETileType.YELLOW, ETileType.PURPLE, ETileType.YELLOW],
@@ -25,4 +22,17 @@ export function getRandomBoard(grid: ETileType[][]): Tile[][] {
     }),
   );
   return board;
+}
+
+export function getTilesGrid(board: Tile[][]): ETileType[][] {
+  const grid: ETileType[][] = [];
+
+  board.forEach((line, rowIndex) =>
+    line.forEach((tileType, columnIndex) => {
+      !grid[rowIndex]?.length && (grid[rowIndex] = []);
+      grid[rowIndex].push(board[rowIndex][columnIndex].tileType);
+    }),
+  );
+
+  return grid;
 }

@@ -2,6 +2,7 @@ import { gameScene } from '../scenes/GameScene';
 import { ETileType } from '../config';
 import { EAssetsSprites } from '../assets';
 import { tileToPosition } from '../game/utilities/position';
+import { gameManager } from '../game/Manager';
 
 export default class Tile extends Phaser.GameObjects.Sprite {
   public currentTile: IPositionInTile;
@@ -23,6 +24,6 @@ export default class Tile extends Phaser.GameObjects.Sprite {
   }
 
   onPointerDown() {
-    console.log('onPointerDown', this.currentTile);
+    gameManager.setSelectedTile(this);
   }
 }
