@@ -14,7 +14,7 @@ export const INITIAL_BOARD_SCREEN = {
 };
 
 export const TILE = {
-  WIDTH: 171,
+  WIDTH: 173,
   HEIGHT: 192,
 };
 
