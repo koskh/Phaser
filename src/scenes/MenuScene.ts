@@ -1,22 +1,21 @@
 import { Scene, GameObjects } from 'phaser';
-import { EAssets } from '../assets';
+import { ASSETS, EAssets } from '../assets';
 
-export class MainMenu extends Scene {
+export default class MenuScene extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
   title: GameObjects.Text;
 
   constructor() {
-    super('MainMenu');
+    super('MenuScene');
   }
 
+  preload() {
+    Object.keys(ASSETS).map((assetKey) => {
+      this.load.image(assetKey, ASSETS[assetKey as EAssets].url);
+    });
+  }
   create() {
-    this.background = this.add.image(
-      this.sys.canvas.width / 2,
-      this.sys.canvas.height / 2,
-      EAssets.BACK_GROUND,
-    );
-
     this.logo = this.add.image(this.sys.canvas.width / 2, 300, EAssets.LOGO);
 
     this.title = this.add

@@ -1,5 +1,9 @@
-export default {
-  rows: 3,
-  cols: 3,
-  variations: 5,
+export const BACKGROUND = {
+  WIDHT: 1920,
+  HEIGHT: 1720,
+};
+
+export const HALF_SCREEN = {
+  WIDTH: BACKGROUND.WIDHT / 2,
+  HEIGHT: BACKGROUND.HEIGHT / 2,
 };
