@@ -18,6 +18,7 @@
   ],
   "files": [
     "./src/main.ts",
+    "./src/global.d.ts",
     "node_modules/@types/jest/index.d.ts"
   ]
 }

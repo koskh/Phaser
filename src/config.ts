@@ -14,8 +14,8 @@ export const INITIAL_BOARD_SCREEN = {
 };
 
 export const TILE = {
-  WIDTH: 190,
-  HEIGHT: 190,
+  WIDTH: 171,
+  HEIGHT: 192,
 };
 
 export enum ETileType {
