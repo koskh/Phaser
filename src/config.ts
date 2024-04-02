@@ -17,3 +17,11 @@ export const TILE = {
   WIDTH: 190,
   HEIGHT: 190,
 };
+
+export enum ETileType {
+  BLUE,
+  PURPLE,
+  RED,
+  YELLOW,
+  GREEN,
+}

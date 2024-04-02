@@ -1,7 +1,9 @@
-interface IGameState {
-  board: IGameBoard | null;
-  count: number;
-  attempts: number;
+interface IPositionInPixel {
+  x: number;
+  y: number;
 }
 
-interface IGameBoard extends Array<Array<number>> {}
+interface IPositionInTile {
+  tileX: number;
+  tileY: number;
+}
