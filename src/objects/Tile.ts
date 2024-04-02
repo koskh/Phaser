@@ -1,7 +1,7 @@
 import { gameScene } from '../scenes/GameScene';
 import { ETileType } from '../config';
 import { EAssetsSprites } from '../assets';
-import { tileToPosition } from '../game/utilities';
+import { tileToPosition } from '../game/utilities/position';
 
 export default class Tile extends Phaser.GameObjects.Sprite {
   public currentTile: IPositionInTile;

@@ -1,4 +1,4 @@
-import { tileToPosition } from '../';
+import { tileToPosition } from '../position';
 import { INITIAL_BOARD_SCREEN } from '../../../config';
 
 test('can convert tile position to board cords', () => {

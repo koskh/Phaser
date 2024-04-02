@@ -1,5 +1,6 @@
 import Tile from '../objects/Tile';
-import { ETileType } from '../config';
+
+import { getRandomBoard, getRandomTilesGrid } from './utilities/board';
 
 export default class Board {
   private current: Tile[][] = [[]];
@@ -9,23 +10,8 @@ export default class Board {
   }
 
   create() {
-    const board: Tile[][] = [];
-
-    const pseudoRandomedBoard = [
-      [ETileType.RED, ETileType.BLUE, ETileType.GREEN],
-      [ETileType.YELLOW, ETileType.PURPLE, ETileType.YELLOW],
-      [ETileType.RED, ETileType.BLUE, ETileType.GREEN],
-    ];
-
-    pseudoRandomedBoard.forEach((line, rowIndex) =>
-      line.forEach((tileType, columnIndex) => {
-        !board[rowIndex]?.length && (board[rowIndex] = []);
-        //
-        board[rowIndex].push(
-          new Tile(tileType, { tileX: rowIndex, tileY: columnIndex }),
-        );
-      }),
-    );
+    const tilesGrid = getRandomTilesGrid();
+    const board = getRandomBoard(tilesGrid);
 
     this.current = board;
   }
