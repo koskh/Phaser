@@ -2,6 +2,7 @@ import { getRandomBoard, getRandomTilesGrid } from '../board';
 import { ETileType } from '../../../config';
 
 jest.mock('../../../objects/Tile');
+
 test('can generate grid', () => {
   expect(getRandomTilesGrid()).toHaveLength(3);
   expect(getRandomTilesGrid()[0]).toHaveLength(3);
