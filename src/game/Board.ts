@@ -1,4 +1,5 @@
-import Tile from './Tile';
+import Tile from '../objects/Tile';
+import { ETileType } from '../config';
 
 export default class Board {
   private current: Tile[][] = [[]];
@@ -11,16 +12,18 @@ export default class Board {
     const board: Tile[][] = [];
 
     const pseudoRandomedBoard = [
-      ['g', 'y', 'b'],
-      ['w', 'w', 'g'],
-      ['w', 'g', 'r'],
+      [ETileType.RED, ETileType.BLUE, ETileType.GREEN],
+      [ETileType.YELLOW, ETileType.PURPLE, ETileType.YELLOW],
+      [ETileType.RED, ETileType.BLUE, ETileType.GREEN],
     ];
 
     pseudoRandomedBoard.forEach((line, rowIndex) =>
-      line.forEach((piece, columnIndex) => {
+      line.forEach((tileType, columnIndex) => {
         !board[rowIndex]?.length && (board[rowIndex] = []);
         //
-        board[rowIndex].push(new Tile());
+        board[rowIndex].push(
+          new Tile(tileType, { tileX: rowIndex, tileY: columnIndex }),
+        );
       }),
     );
 

@@ -15,8 +15,4 @@ export default class GameScene extends Phaser.Scene {
   create() {
     new GameManager();
   }
-
-  startGame() {
-    // resetScoreAndLevel(gameConfig.rows, gameConfig.cols, gameConfig.variations);
-  }
 }
