@@ -9,14 +9,9 @@ export default class GameScene extends Phaser.Scene {
     gameScene = this;
   }
 
-  create() {
-    this.scene.run('UI');
-    this.scene.run('GameBoard');
+  preload() {}
 
-    this.events.once(Phaser.Scenes.Events.RENDER, () => {
-      this.startGame();
-    });
-  }
+  create() {}
 
   startGame() {
     // resetScoreAndLevel(gameConfig.rows, gameConfig.cols, gameConfig.variations);

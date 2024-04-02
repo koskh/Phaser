@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
-import { EApplicationEvents } from '../utilities/ApplicationEvents';
-import { onEvent } from '../utilities/eventsCenter';
+// import { EApplicationEvents } from '../utilities/ApplicationEvents';
+// import { onEvent } from '../utilities/eventsCenter';
 
 export class UI extends Scene {
   labelCount: Phaser.GameObjects.Text;

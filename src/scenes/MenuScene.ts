@@ -1,5 +1,10 @@
 import { Scene, GameObjects } from 'phaser';
-import { ASSETS, EAssets } from '../assets';
+import {
+  ASSETS_IMG,
+  ASSETS_SPRITES,
+  EAssetsImg,
+  EAssetsSprites,
+} from '../assets';
 
 export default class MenuScene extends Scene {
   background: GameObjects.Image;
@@ -11,12 +16,23 @@ export default class MenuScene extends Scene {
   }
 
   preload() {
-    Object.keys(ASSETS).map((assetKey) => {
-      this.load.image(assetKey, ASSETS[assetKey as EAssets].url);
+    Object.keys(ASSETS_IMG).map((assetKey) => {
+      const { url } = ASSETS_IMG[assetKey as EAssetsImg];
+      this.load.image(assetKey, url);
+    });
+
+    Object.keys(ASSETS_SPRITES).map((assetKey) => {
+      // this.load.image(assetKey, ASSETS_IMG[assetKey as EAssetsSprites].url);
+      const { url, width, height } = ASSETS_SPRITES[assetKey as EAssetsSprites];
+
+      this.load.spritesheet(assetKey, url, {
+        frameWidth: width,
+        frameHeight: height,
+      });
     });
   }
   create() {
-    this.logo = this.add.image(this.sys.canvas.width / 2, 300, EAssets.LOGO);
+    this.logo = this.add.image(this.sys.canvas.width / 2, 300, EAssetsImg.LOGO);
 
     this.title = this.add
       .text(this.sys.canvas.width / 2, 460, 'Click here to start game', {
