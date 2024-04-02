@@ -19,10 +19,10 @@ export default class Tile extends Phaser.GameObjects.Sprite {
     this.tileType = tileType;
 
     this.setInteractive();
-    this.on('pointerdown', () => this.onClicked());
+    this.on('pointerdown', () => this.onPointerDown());
   }
 
-  onClicked() {
-    console.log('onClicked', this.currentTile);
+  onPointerDown() {
+    console.log('onPointerDown', this.currentTile);
   }
 }
