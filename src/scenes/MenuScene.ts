@@ -22,7 +22,6 @@ export default class MenuScene extends Scene {
     });
 
     Object.keys(ASSETS_SPRITES).map((assetKey) => {
-      // this.load.image(assetKey, ASSETS_IMG[assetKey as EAssetsSprites].url);
       const { url, width, height } = ASSETS_SPRITES[assetKey as EAssetsSprites];
 
       this.load.spritesheet(assetKey, url, {
