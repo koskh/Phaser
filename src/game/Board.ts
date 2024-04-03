@@ -39,4 +39,8 @@ export default class Board {
   public getTileMatches(position: IPositionInTile) {
     return findMatches(position, this.getCurrentGrid());
   }
+
+  public setTile(newTile: Tile, positionInTile: IPositionInTile) {
+    this.current[positionInTile.tileX][positionInTile.tileY] = newTile;
+  }
 }

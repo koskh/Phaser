@@ -3,6 +3,7 @@ import { ETileType } from '../config';
 import { EAssetsSprites } from '../assets';
 import { tileToPosition } from '../game/utilities/position';
 import { gameManager } from '../game/Manager';
+import { board } from '../game/Board';
 
 export default class Tile extends Phaser.GameObjects.Sprite {
   public currentTile: IPositionInTile;
@@ -26,4 +27,10 @@ export default class Tile extends Phaser.GameObjects.Sprite {
   onPointerDown() {
     gameManager.setSelectedTile(this);
   }
+
+  public updatePositionAndTile = (tile: IPositionInTile) => {
+    this.currentTile = tile;
+    this.currentPosition = tileToPosition(tile);
+    board.setTile(this, tile);
+  };
 }

@@ -4,8 +4,8 @@ import Tile from '../../objects/Tile';
 export function getPseudoRandomTilesGrid(): ETileType[][] {
   return [
     [ETileType.RED, ETileType.GREEN, ETileType.GREEN],
-    [ETileType.PURPLE, ETileType.PURPLE, ETileType.PURPLE],
-    [ETileType.PURPLE, ETileType.PURPLE, ETileType.GREEN],
+    [ETileType.PURPLE, ETileType.RED, ETileType.YELLOW],
+    [ETileType.GREEN, ETileType.GREEN, ETileType.YELLOW],
   ];
 }
 

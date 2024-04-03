@@ -17,8 +17,11 @@ export const makeScaleAnimation = (tiles: Tile[]) =>
     });
   });
 
-// @ts-expect-error DEV-only
-export const makeMovementAnimation = (target, { x, y }, duration) =>
+export const makeMovementAnimation = (
+  target: Tile,
+  { x, y }: IPositionInPixel,
+  duration: number = 250,
+) =>
   new Promise<void>((resolve) => {
     gameScene.tweens.add({
       targets: target,
