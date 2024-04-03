@@ -35,14 +35,6 @@ export default class Board {
   public getTileMatches(position: IPositionInTile) {
     const matches = findMatches(position, this.getCurrentGrid());
 
-    const RIGHT = [1, 0];
-    const LEFT = [1, 0];
-    const UP = [0, 1];
-    const DOWN = [0, -1];
-
-    const COLUMNS = 3;
-    const ROWS = 3;
-
-    // console.log('matches', matches);
+    console.log('matches', matches);
   }
 }

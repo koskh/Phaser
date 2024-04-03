@@ -1,4 +1,8 @@
-import { findAdjacentCells, findGraphForCell } from '../matches';
+import {
+  findAdjacentCells,
+  findGraphForCell,
+  getAllGraphPosition,
+} from '../matches';
 
 import { ETileType } from '../../../config';
 
@@ -52,4 +56,21 @@ test('can build one-way grap for adjacent cells', () => {
       },
     },
   });
+});
+
+test('can get grid positions from graph', () => {
+  const GRAPH = findGraphForCell(CELL, GRID);
+  expect(getAllGraphPosition(GRAPH)).toEqual([
+    { tileX: 1, tileY: 0 },
+    { tileX: 2, tileY: 0 },
+  ]);
+
+  const GRAPH_2 = findGraphForCell(CELL_2, GRID);
+  expect(getAllGraphPosition(GRAPH_2)).toEqual([
+    { tileX: 1, tileY: 1 },
+    { tileX: 0, tileY: 1 },
+    { tileX: 2, tileY: 1 },
+    { tileX: 0, tileY: 2 },
+    { tileX: 1, tileY: 2 },
+  ]);
 });
