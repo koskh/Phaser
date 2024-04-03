@@ -32,10 +32,8 @@ export default class Board {
     return getTilesGrid(this.current);
   }
 
-  public getTileMatches(tile: IPositionInTile, tileType: ETileType) {
-    console.log('currentTile', tile);
-
-    const matches = findMatches(tile, tileType, this.getCurrentGrid());
+  public getTileMatches(position: IPositionInTile) {
+    const matches = findMatches(position, this.getCurrentGrid());
 
     const RIGHT = [1, 0];
     const LEFT = [1, 0];
@@ -45,6 +43,6 @@ export default class Board {
     const COLUMNS = 3;
     const ROWS = 3;
 
-    console.log('matches', matches);
+    // console.log('matches', matches);
   }
 }

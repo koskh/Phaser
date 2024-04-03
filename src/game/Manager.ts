@@ -14,14 +14,7 @@ export default class GameManager {
     gameManager = this;
     this.board = new Board();
   }
-
-  // setSelectedTile(newTile: Tile) {
   setSelectedTile(tile: Tile) {
-    board.getTileMatches(tile.currentTile, tile.tileType);
-    // board.checkMatch(board.getCurrentMap(), newTile);
-    // const { matchArrOfPieces, finalMap } = board.checkMatch(
-    //   board.getCurrentMap(),
-    //   newTile,
-    // );
+    board.getTileMatches(tile.currentTile);
   }
 }

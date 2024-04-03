@@ -25,3 +25,8 @@ export enum ETileType {
   YELLOW,
   GREEN,
 }
+
+export const GRID = {
+  ROWS: 3,
+  COLUMNS: 3,
+};
