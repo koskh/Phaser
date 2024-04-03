@@ -28,13 +28,15 @@ export default class Board {
     return this.current;
   }
 
+  public getTileByPosition(position: IPositionInTile) {
+    return this.current[position.tileY][position.tileX];
+  }
+
   public getCurrentGrid(): ETileType[][] {
     return getTilesGrid(this.current);
   }
 
   public getTileMatches(position: IPositionInTile) {
-    const matches = findMatches(position, this.getCurrentGrid());
-
-    console.log('matches', matches);
+    return findMatches(position, this.getCurrentGrid());
   }
 }

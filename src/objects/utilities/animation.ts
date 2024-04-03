@@ -1,10 +1,10 @@
 import { gameScene } from '../../scenes/GameScene';
 import Tile from '../Tile';
 
-export const makeScaleAnimation = (pieces: Tile[]) =>
+export const makeScaleAnimation = (tiles: Tile[]) =>
   new Promise<void>((resolve) => {
     gameScene.tweens.add({
-      targets: pieces,
+      targets: tiles,
       scaleX: 0,
       scaleY: 0,
       ease: 'Linear',

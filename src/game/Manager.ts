@@ -2,7 +2,7 @@
 import Board, { board } from './Board';
 import Tile from '../objects/Tile';
 import { makeScaleAnimation } from '../objects/utilities/animation';
-import { ETileType } from '../config';
+import { ETileType, MIN_ADJACENTS } from '../config';
 
 export let gameManager: GameManager;
 export default class GameManager {
@@ -14,7 +14,20 @@ export default class GameManager {
     gameManager = this;
     this.board = new Board();
   }
-  setSelectedTile(tile: Tile) {
-    board.getTileMatches(tile.currentTile);
+
+  public async setSelectedTile(tile: Tile) {
+    const matches = board.getTileMatches(tile.currentTile);
+
+    const mathedTiles = matches.map((positionInTile) =>
+        board.getTileByPosition(positionInTile),
+    );
+
+    if (mathedTiles.length >= MIN_ADJACENTS) {
+      await this.destroyTiles(mathedTiles);
+    }
   }
+
+  private destroyTiles = async (tiles: Tile[]): Promise<void> => {
+    await makeScaleAnimation(tiles);
+  };
 }

@@ -30,3 +30,5 @@ export const GRID = {
   ROWS: 3,
   COLUMNS: 3,
 };
+
+export const MIN_ADJACENTS = 4;
