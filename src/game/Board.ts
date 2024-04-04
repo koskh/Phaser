@@ -2,7 +2,7 @@
 import Tile from '../objects/Tile';
 import {
   getNewTilesGrid,
-  getRandomBoard,
+  getNewBoard,
   getTestTilesGrid,
   getTilesGrid,
 } from './utilities/board';
@@ -24,12 +24,9 @@ export default class Board {
 
   create() {
     // const tilesGrid: IGameGrid = getTestTilesGrid();
-    const tilesGrid: IGameGrid = getNewTilesGrid(
-      GRID.ROWS,
-      GRID.COLUMNS,
-      VARIATIONS,
-    );
-    const board: IGameBoard = getRandomBoard(tilesGrid);
+    const tilesGrid: IGameGrid = getNewTilesGrid(GRID.ROWS, GRID.COLUMNS);
+
+    const board: IGameBoard = getNewBoard(tilesGrid);
 
     this.current = board;
   }

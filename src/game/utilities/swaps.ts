@@ -3,6 +3,7 @@ import { ETileType, GRID } from '../../config';
 import Tile from '../../objects/Tile';
 import { makeMovementAnimation } from '../../objects/utilities/animation';
 import { tileToPosition } from './position';
+import { getNewTileType } from './board';
 
 export function deleteGridCells(
   board: Board,
@@ -29,7 +30,7 @@ export function swapVerticalTiles(
     swapVerticalTiles(board, column, ++currentRow);
   } else {
     if (currentRow === 0) {
-      const newTopTile = new Tile(ETileType.BLUE, {
+      const newTopTile = new Tile(getNewTileType(), {
         tileX: column,
         tileY: -1,
       });

@@ -1,4 +1,4 @@
-import { ETileType } from '../../config';
+import { ETileType, VARIATIONS } from '../../config';
 import Tile from '../../objects/Tile';
 import { IGameBoard, IGameGrid } from '../Board';
 
@@ -10,24 +10,18 @@ export function getTestTilesGrid(): IGameGrid {
   ];
 }
 
-export function getNewTilesGrid(
-  rows: number,
-  cols: number,
-  variations: number,
-): IGameGrid {
+export function getNewTilesGrid(rows: number, cols: number): IGameGrid {
   const grid: IGameGrid = [];
   for (let row = 0; row < rows; row++) {
     for (let column = 0; column < cols; column++) {
       !grid[row]?.length && (grid[row] = []);
-      const variation = Phaser.Math.Between(1, variations - 1);
-
-      grid[row].push(variation);
+      grid[row].push(getNewTileType());
     }
   }
   return grid;
 }
 
-export function getRandomBoard(grid: IGameGrid): IGameBoard {
+export function getNewBoard(grid: IGameGrid): IGameBoard {
   const board: IGameBoard = [];
 
   grid.forEach((line, rowIndex) =>
@@ -35,7 +29,7 @@ export function getRandomBoard(grid: IGameGrid): IGameBoard {
       !board[rowIndex]?.length && (board[rowIndex] = []);
       //
       board[rowIndex].push(
-        tileType
+        tileType !== null
           ? new Tile(tileType, { tileX: columnIndex, tileY: rowIndex })
           : null,
       );
@@ -55,4 +49,9 @@ export function getTilesGrid(board: IGameBoard): IGameGrid {
   );
 
   return grid;
+}
+
+export function getNewTileType(): ETileType {
+  const variation = Phaser.Math.Between(0, VARIATIONS - 1);
+  return variation as ETileType;
 }

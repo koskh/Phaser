@@ -1,5 +1,5 @@
 import {
-  getRandomBoard,
+  getNewBoard,
   getTestTilesGrid,
   getNewTilesGrid,
   getTilesGrid,
@@ -21,26 +21,23 @@ test('can generate pseudo grid', () => {
 });
 
 test('can generate new random grid', () => {
-  const grid = getNewTilesGrid(
-    TEST_GRID.ROWS,
-    TEST_GRID.COLUMNS,
-    TEST_GRID.VARIATIONS,
-  );
+  const grid = getNewTilesGrid(TEST_GRID.ROWS, TEST_GRID.COLUMNS);
   expect(grid).toHaveLength(TEST_GRID.ROWS);
   expect(grid[0]).toHaveLength(TEST_GRID.COLUMNS);
 
   expect(grid[0][0]).not.toBeUndefined();
+  expect(grid[0][0]).not.toBeNull();
 });
 test('can generate random board', () => {
   const grid = getTestTilesGrid();
 
-  expect(getRandomBoard(grid)).toHaveLength(TEST_GRID.ROWS);
-  expect(getRandomBoard(grid)[0]).toHaveLength(TEST_GRID.COLUMNS);
+  expect(getNewBoard(grid)).toHaveLength(TEST_GRID.ROWS);
+  expect(getNewBoard(grid)[0]).toHaveLength(TEST_GRID.COLUMNS);
 });
 
 test('can return grid from current board', () => {
   const grid = getTestTilesGrid();
-  const board = getRandomBoard(grid);
+  const board = getNewBoard(grid);
 
   expect(getTilesGrid(board)).toHaveLength(grid.length);
   expect(getTilesGrid(board)[0]).toHaveLength(grid[0].length);
