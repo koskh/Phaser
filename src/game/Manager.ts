@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import Board, { board } from './Board';
+import Board from './Board';
 import Tile from '../objects/Tile';
-import {
-  makeMovementAnimation,
-  makeScaleAnimation,
-} from '../objects/utilities/animation';
-import { ETileType, GRID, MIN_ADJACENTS } from '../config';
-import { tileToPosition } from './utilities/position';
+import { makeScaleAnimation } from '../objects/utilities/animation';
+import { GRID, MIN_ADJACENTS } from '../config';
+
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 
 export let gameManager: GameManager;
 export default class GameManager {
-  // scene: Phaser.Scene
   board: Board;
   currentSelectedTile: Tile | null = null;
 
@@ -21,10 +17,7 @@ export default class GameManager {
   }
 
   public async setSelectedTile(tile: Tile) {
-    // Delete adjacents
     const matches = this.board.getTileMatches(tile.currentTile);
-
-    // console.log('matchedTiles', matchedTiles);
 
     if (matches.length >= MIN_ADJACENTS) {
       await this.destroyTiles(matches);

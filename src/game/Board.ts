@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import Tile from '../objects/Tile';
 import {
+  getNewTilesGrid,
   getRandomBoard,
-  getPseudoRandomTilesGrid,
+  getTestTilesGrid,
   getTilesGrid,
 } from './utilities/board';
 import findMatches from './utilities/matches';
-import { ETileType } from '../config';
+import { ETileType, GRID, VARIATIONS } from '../config';
 
 export interface IGameGrid extends Array<Array<ETileType | null>> {}
 
@@ -22,7 +23,12 @@ export default class Board {
   }
 
   create() {
-    const tilesGrid: IGameGrid = getPseudoRandomTilesGrid();
+    // const tilesGrid: IGameGrid = getTestTilesGrid();
+    const tilesGrid: IGameGrid = getNewTilesGrid(
+      GRID.ROWS,
+      GRID.COLUMNS,
+      VARIATIONS,
+    );
     const board: IGameBoard = getRandomBoard(tilesGrid);
 
     this.current = board;

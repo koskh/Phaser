@@ -31,4 +31,6 @@ export const GRID = {
   COLUMNS: 3,
 };
 
+export const VARIATIONS = Object.keys(ETileType).length / 2;
+
 export const MIN_ADJACENTS = 1;
