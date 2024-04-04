@@ -5,7 +5,8 @@ import { EBoosterType, INITIAL_BOARD_SCREEN } from '../../config';
 import { gameManager } from '../../game/Manager';
 
 export let scoreText: GameObjects.Text,
-  levelText: GameObjects.Text,
+  movieText: GameObjects.Text,
+  resetText: GameObjects.Text,
   boosterText: GameObjects.Text;
 export let teleportBtn: GameObjects.Image;
 export let ui: Phaser.Scene;
@@ -46,13 +47,21 @@ export default class UI extends Phaser.Scene {
         font: 'bold 53px Geneva',
       })
       .setDepth(1);
-    levelText = this.add
-      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 200, 'Level: _', {
+    movieText = this.add.text(
+      50,
+      INITIAL_BOARD_SCREEN.HEIGHT - 200,
+      'Moves: _',
+      {
+        font: 'bold 53px Geneva',
+      },
+    );
+    boosterText = this.add
+      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 150, 'Booster: none', {
         font: 'bold 53px Geneva',
       })
       .setDepth(1);
-    boosterText = this.add
-      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 150, 'Booster: none', {
+    resetText = this.add
+      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 100, 'Resets: _', {
         font: 'bold 53px Geneva',
       })
       .setDepth(1);
