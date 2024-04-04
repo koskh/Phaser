@@ -26,57 +26,41 @@ export default class GameManager {
       board.getTileByPosition(positionInTile),
     );
 
-    console.log('matchedTiles', matchedTiles);
+    // console.log('matchedTiles', matchedTiles);
 
     if (matchedTiles.length >= MIN_ADJACENTS) {
+      // @ts-expect-error DEV-ONLY
       await this.destroyTiles(matchedTiles);
-      // await this.fallTails(matchedTiles);
-
-      // const t = new Tile(ETileType.BLUE, {
-      //   tileX: 0,
-      //   tileY: -1,
-      // });
-      //
-      // makeMovementAnimation(t, tileToPosition({ tileX: 0, tileY: 0 }));
-
-      // t.updatePositionAndTile({ tileX: 0, tileY: 0 });
-      // t.updatePositionAndTile(t,)
-      // board.setTile(t, { tileY: 0, tileX: 0 });
-
-      // const b = board.getCurrentMap();
-
-      // t.currentTile = { tileX: 0, tileY: 0 };
-      //
-      // b[0][0] = t;
     }
+
     //fall dawn tiles
     if (matchedTiles.length >= MIN_ADJACENTS) {
-      // const topTile = new Tile(ETileType.BLUE, { tileX: 0, tileY: -1 });
-      //
       const tilesSortedByY = [...matches].sort((a, b) => a.tileY - b.tileY);
-      console.log('tilesSortedByY', tilesSortedByY);
+      // console.log('tilesSortedByY', tilesSortedByY);
 
       const column = 0;
 
-      const tempColumn: Array<Tile | null> = board // DEV-only work by ref
-        .getCurrentMap()
-        .map((row) => row[column]);
-      console.log('tempColumn', tempColumn);
-
       tilesSortedByY.map((cell) => {
-        tempColumn[cell.tileY] = null; // DEV-only work by ref
+        board.setTile(null, { tileX: column, tileY: cell.tileY });
       });
-      console.log('tempColumn', tempColumn);
+      // console.log('tempColumn', tempColumn);
 
-      swapTiles(tempColumn);
+      console.log('start prevMap', board.getCurrentMap());
+
+      // swapVerticalTiles();
 
       // eslint-disable-next-line no-inner-declarations
-      function swapTiles(columns: Array<Tile | null>, curentIndex: number = 0) {
+      function swapVerticalTiles(curentIndex: number = 0) {
         // debugger;
 
         if (curentIndex < 0 || curentIndex >= GRID.ROWS) return;
 
-        if (columns[curentIndex] === null) {
+        const currentTile = board.getTile({
+          tileY: curentIndex,
+          tileX: column,
+        });
+
+        if (currentTile === null) {
           if (curentIndex === 0) {
             const newTopTile = new Tile(ETileType.BLUE, {
               tileX: 0,
@@ -87,42 +71,37 @@ export default class GameManager {
               newTopTile,
               tileToPosition({ tileX: column, tileY: 0 }),
             );
-
-            // newTopTile.currentTile = { tileX: column, tileY: 0 };
             newTopTile.updatePositionAndTile({ tileX: 0, tileY: 0 });
-
-            tempColumn[curentIndex] = newTopTile;
+            // debugger;
           } else {
-            makeMovementAnimation(
-              // @ts-expect-error dev-only
-              tempColumn[curentIndex - 1],
-              tileToPosition({ tileX: column, tileY: curentIndex }),
-            );
-
-            // @ts-ignore
-            // tempColumn[curentIndex - 1].currentTile = {
-            //   tileX: column,
-            //   tileY: curentIndex,
-            // };
-
-            tempColumn[curentIndex] = tempColumn[curentIndex - 1];
-            tempColumn[curentIndex - 1] = null;
-
-            // @ts-ignore
-            tempColumn[curentIndex].updatePositionAndTile({
+            const topTile = board.getTile({
+              tileY: curentIndex - 1,
               tileX: column,
-              tileY: curentIndex,
             });
 
-            swapTiles(columns, 0);
+            if (topTile) {
+              makeMovementAnimation(
+                topTile,
+                tileToPosition({ tileX: column, tileY: curentIndex }),
+              );
+
+              topTile.updatePositionAndTile({
+                tileX: column,
+                tileY: curentIndex,
+              });
+
+              board.setTile(null, { tileX: column, tileY: curentIndex - 1 });
+            }
+            // debugger;
+            swapVerticalTiles(curentIndex - 1);
           }
         } else {
-          swapTiles(columns, ++curentIndex);
+          swapVerticalTiles(curentIndex + 1);
         }
       }
 
-      console.log('### prevMap', board.getCurrentMap());
-      console.log('### tempColumn', tempColumn);
+      // console.log('### prevMap', board.getCurrentMap());
+      // console.log('### tempColumn', tempColumn);
     }
   }
 

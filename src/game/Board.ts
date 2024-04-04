@@ -8,9 +8,13 @@ import {
 import findMatches from './utilities/matches';
 import { ETileType } from '../config';
 
+export interface IGameGrid extends Array<Array<ETileType | null>> {}
+
+export interface IGameBoard extends Array<Array<Tile | null>> {}
+
 export let board: Board;
 export default class Board {
-  private current: Tile[][] = [[]];
+  private current: IGameBoard;
 
   constructor() {
     board = this;
@@ -18,8 +22,8 @@ export default class Board {
   }
 
   create() {
-    const tilesGrid = getPseudoRandomTilesGrid();
-    const board = getRandomBoard(tilesGrid);
+    const tilesGrid: IGameGrid = getPseudoRandomTilesGrid();
+    const board: IGameBoard = getRandomBoard(tilesGrid);
 
     this.current = board;
   }
@@ -32,7 +36,7 @@ export default class Board {
     return this.current[position.tileY][position.tileX];
   }
 
-  public getCurrentGrid(): ETileType[][] {
+  public getCurrentGrid(): IGameGrid {
     return getTilesGrid(this.current);
   }
 
@@ -40,7 +44,11 @@ export default class Board {
     return findMatches(position, this.getCurrentGrid());
   }
 
-  public setTile(newTile: Tile, positionInTile: IPositionInTile) {
-    this.current[positionInTile.tileX][positionInTile.tileY] = newTile;
+  public getTile(positionInTile: IPositionInTile): Tile | null {
+    return this.current[positionInTile.tileY][positionInTile.tileX];
+  }
+
+  public setTile(newTile: Tile | null, positionInTile: IPositionInTile) {
+    this.current[positionInTile.tileY][positionInTile.tileX] = newTile;
   }
 }

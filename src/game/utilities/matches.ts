@@ -1,4 +1,5 @@
 import { ETileType, GRID } from '../../config';
+import { IGameGrid } from '../Board';
 
 const RIGHT_VECTOR = [1, 0];
 const LEFT_VECTOR = [-1, 0];
@@ -9,7 +10,7 @@ const { ROWS, COLUMNS } = GRID;
 
 export default function findMatches(
   position: IPositionInTile,
-  grid: ETileType[][],
+  grid: IGameGrid,
 ): IPositionInTile[] {
   const graph = findGraphForCell(position, grid);
   return getAllGraphPosition(graph);
@@ -36,7 +37,7 @@ export function getAllGraphPosition(graph: IGraph): IPositionInTile[] {
 }
 export function findGraphForCell(
   position: IPositionInTile,
-  grid: ETileType[][],
+  grid: IGameGrid,
   visited: { [key: string]: boolean } = {},
 ): IGraph {
   const root = `${position.tileX}_${position.tileY}`;
@@ -64,7 +65,7 @@ function isCellInGrid(tileX: number, tileY: number): boolean {
 
 export function findAdjacentCells(
   position: IPositionInTile,
-  grid: ETileType[][],
+  grid: IGameGrid,
 ): IPositionInTile[] {
   const vectors = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
   const searchedType = grid[position.tileY][position.tileX];
