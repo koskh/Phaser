@@ -1,15 +1,19 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import Board from './Board';
 import Tile from '../objects/Tile';
-import { makeScaleAnimation } from '../objects/utilities/animation';
+import {
+  makeMovementAnimation,
+  makeScaleAnimation,
+} from '../objects/utilities/animation';
 import { GRID, MIN_ADJACENTS } from '../config';
 
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
+import { tileToPosition } from './utilities/position';
 
 export let gameManager: GameManager;
 export default class GameManager {
   board: Board;
-  currentSelectedTile: Tile | null = null;
+  prevSelectedTile: Tile | null = null;
 
   constructor() {
     gameManager = this;
@@ -22,12 +26,15 @@ export default class GameManager {
     if (matches.length >= MIN_ADJACENTS) {
       await this.destroyTiles(matches);
       await this.fallDownTails();
+
+      this.prevSelectedTile = null;
     } else {
-      if (this.currentSelectedTile === null) {
-        this.currentSelectedTile = tile;
+      if (this.prevSelectedTile === null) {
+        this.prevSelectedTile = tile;
       } else {
-        //swap tiles
-        const fromCell = this.currentSelectedTile.cell;
+        //swap asjacents tiles
+        await this.swapTwoTiles(this.prevSelectedTile, tile);
+        this.prevSelectedTile = null;
       }
     }
   }
@@ -48,5 +55,19 @@ export default class GameManager {
     for (let column = 0; column < GRID.COLUMNS; column++) {
       swapVerticalTiles(this.board, column);
     }
+  };
+
+  private swapTwoTiles = async (
+    fromTile: Tile,
+    toTile: Tile,
+  ): Promise<void> => {
+    const fromCell = { ...fromTile.cell };
+    const toCell = { ...toTile.cell };
+
+    makeMovementAnimation(fromTile, tileToPosition(toCell));
+    makeMovementAnimation(toTile, tileToPosition(fromCell));
+
+    fromTile.updatePositionAndTile(toCell);
+    toTile.updatePositionAndTile(fromCell);
   };
 }
