@@ -6,19 +6,19 @@ import { gameManager } from '../game/Manager';
 import Board, { board } from '../game/Board';
 
 export default class Tile extends Phaser.GameObjects.Sprite {
-  public currentTile: IPositionInTile;
-  public currentPosition: IPositionInPixel;
+  public cell: IPositionInCell;
+  public position: IPositionInPixel;
   public tileType: ETileType;
   private board: Board;
 
-  constructor(tileType: ETileType, tilePos: IPositionInTile) {
+  constructor(tileType: ETileType, tilePos: IPositionInCell) {
     const { x, y } = tileToPosition(tilePos);
 
     super(gameScene, x, y, EAssetsSprites.TILES, tileType);
     gameScene.add.existing(this).setDepth(1).setOrigin(0.5, 0.5);
 
-    this.currentPosition = { x, y };
-    this.currentTile = tilePos;
+    this.position = { x, y };
+    this.cell = tilePos;
     this.tileType = tileType;
     this.board = board;
 
@@ -27,12 +27,12 @@ export default class Tile extends Phaser.GameObjects.Sprite {
   }
 
   onPointerDown() {
-    gameManager.setSelectedTile(this);
+    gameManager.onSelectTile(this);
   }
 
-  public updatePositionAndTile = (tile: IPositionInTile) => {
-    this.currentTile = tile;
-    this.currentPosition = tileToPosition(tile);
+  public updatePositionAndTile = (tile: IPositionInCell) => {
+    this.cell = tile;
+    this.position = tileToPosition(tile);
     this.board.setTile(this, tile);
   };
 }

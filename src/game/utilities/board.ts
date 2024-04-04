@@ -1,13 +1,25 @@
-import { ETileType, VARIATIONS } from '../../config';
+import { ETileType, GRID, VARIATIONS } from '../../config';
 import Tile from '../../objects/Tile';
 import { IGameBoard, IGameGrid } from '../Board';
 
 export function getTestTilesGrid(): IGameGrid {
-  return [
+  const grid = getNewTilesGrid(GRID.ROWS, GRID.COLUMNS);
+  const testPartGrid = [
     [ETileType.RED, ETileType.GREEN, ETileType.GREEN],
-    [ETileType.PURPLE, ETileType.YELLOW, ETileType.YELLOW],
-    [ETileType.GREEN, ETileType.YELLOW, ETileType.YELLOW],
+    [ETileType.PURPLE, ETileType.PURPLE, ETileType.PURPLE],
+    [ETileType.PURPLE, ETileType.PURPLE, ETileType.GREEN],
+    [ETileType.YELLOW, ETileType.BLUE, ETileType.RED],
   ];
+
+  testPartGrid.map((row, rowIndex) => {
+    row.map((cell, columnIndex) => {
+      if (columnIndex < GRID.COLUMNS && rowIndex < GRID.ROWS) {
+        grid[rowIndex][columnIndex] = testPartGrid[rowIndex][columnIndex];
+      }
+    });
+  });
+
+  return grid;
 }
 
 export function getNewTilesGrid(rows: number, cols: number): IGameGrid {

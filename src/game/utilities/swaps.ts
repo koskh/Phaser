@@ -5,10 +5,7 @@ import { makeMovementAnimation } from '../../objects/utilities/animation';
 import { tileToPosition } from './position';
 import { getNewTileType } from './board';
 
-export function deleteGridCells(
-  board: Board,
-  gridPositions: IPositionInTile[],
-) {
+export function deleteGridCells(board: Board, gridPositions: IPositionInCell[]) {
   gridPositions.map((cell) => {
     board.setTile(null, { tileX: cell.tileX, tileY: cell.tileY });
   });

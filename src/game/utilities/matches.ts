@@ -9,14 +9,14 @@ const DOWN_VECTOR = [0, -1];
 const { ROWS, COLUMNS } = GRID;
 
 export default function findMatches(
-  position: IPositionInTile,
+  position: IPositionInCell,
   grid: IGameGrid,
-): IPositionInTile[] {
+): IPositionInCell[] {
   const graph = findGraphForCell(position, grid);
   return getAllGraphPosition(graph);
 }
 
-export function getAllGraphPosition(graph: IGraph): IPositionInTile[] {
+export function getAllGraphPosition(graph: IGraph): IPositionInCell[] {
   const positions: string[] = [];
 
   getLeafs(graph);
@@ -36,7 +36,7 @@ export function getAllGraphPosition(graph: IGraph): IPositionInTile[] {
   }
 }
 export function findGraphForCell(
-  position: IPositionInTile,
+  position: IPositionInCell,
   grid: IGameGrid,
   visited: { [key: string]: boolean } = {},
 ): IGraph {
@@ -45,7 +45,7 @@ export function findGraphForCell(
 
   visited[root] = true;
 
-  const matchedPositions: IPositionInTile[] = findAdjacentCells(position, grid);
+  const matchedPositions: IPositionInCell[] = findAdjacentCells(position, grid);
 
   matchedPositions.map((mp) => {
     const leaf = `${mp.tileX}_${mp.tileY}`;
@@ -64,13 +64,12 @@ function isCellInGrid(tileX: number, tileY: number): boolean {
 }
 
 export function findAdjacentCells(
-  position: IPositionInTile,
+  position: IPositionInCell,
   grid: IGameGrid,
-): IPositionInTile[] {
+): IPositionInCell[] {
   const vectors = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
   const searchedType = grid[position.tileY][position.tileX];
-
-  const adjCells: IPositionInTile[] = [];
+  const adjCells: IPositionInCell[] = [];
 
   for (const vector of vectors) {
     const [x, y] = vector;

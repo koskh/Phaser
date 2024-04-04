@@ -16,17 +16,24 @@ export default class GameManager {
     this.board = new Board();
   }
 
-  public async setSelectedTile(tile: Tile) {
-    const matches = this.board.getTileMatches(tile.currentTile);
+  public async onSelectTile(tile: Tile) {
+    const matches = this.board.getTileMatches(tile.cell);
 
     if (matches.length >= MIN_ADJACENTS) {
       await this.destroyTiles(matches);
       await this.fallDownTails();
+    } else {
+      if (this.currentSelectedTile === null) {
+        this.currentSelectedTile = tile;
+      } else {
+        //swap tiles
+        const fromCell = this.currentSelectedTile.cell;
+      }
     }
   }
 
   private destroyTiles = async (
-    gridPositions: IPositionInTile[],
+    gridPositions: IPositionInCell[],
   ): Promise<void> => {
     const matchedTiles = gridPositions.map((gridPosition) =>
       this.board.getTileByPosition(gridPosition),

@@ -35,7 +35,7 @@ export default class Board {
     return this.current;
   }
 
-  public getTileByPosition(position: IPositionInTile) {
+  public getTileByPosition(position: IPositionInCell) {
     return this.current[position.tileY][position.tileX];
   }
 
@@ -43,15 +43,15 @@ export default class Board {
     return getTilesGrid(this.current);
   }
 
-  public getTileMatches(position: IPositionInTile) {
+  public getTileMatches(position: IPositionInCell) {
     return findMatches(position, this.getCurrentGrid());
   }
 
-  public getTile(positionInTile: IPositionInTile): Tile | null {
+  public getTile(positionInTile: IPositionInCell): Tile | null {
     return this.current[positionInTile.tileY][positionInTile.tileX];
   }
 
-  public setTile(newTile: Tile | null, positionInTile: IPositionInTile) {
+  public setTile(newTile: Tile | null, positionInTile: IPositionInCell) {
     this.current[positionInTile.tileY][positionInTile.tileX] = newTile;
   }
 }

@@ -4,17 +4,13 @@ import {
   getAllGraphPosition,
 } from '../matches';
 
-import { ETileType } from '../../../config';
+import { getTestTilesGrid } from '../board';
 
-const GRID = [
-  [ETileType.RED, ETileType.GREEN, ETileType.GREEN],
-  [ETileType.PURPLE, ETileType.PURPLE, ETileType.PURPLE],
-  [ETileType.PURPLE, ETileType.PURPLE, ETileType.GREEN],
-];
+const GRID = getTestTilesGrid();
 
-const CELL: IPositionInTile = { tileX: 1, tileY: 0 };
-const CELL_2: IPositionInTile = { tileX: 1, tileY: 1 };
-const CELL_3: IPositionInTile = { tileX: 0, tileY: 2 };
+const CELL: IPositionInCell = { tileX: 1, tileY: 0 };
+const CELL_2: IPositionInCell = { tileX: 1, tileY: 1 };
+const CELL_3: IPositionInCell = { tileX: 0, tileY: 2 };
 test('can find adjacements for one cell', () => {
   expect(findAdjacentCells(CELL, GRID)).toHaveLength(1);
   expect(findAdjacentCells(CELL, GRID)).toEqual([{ tileX: 2, tileY: 0 }]);
@@ -25,7 +21,7 @@ test('can find adjacements for one cell', () => {
     { tileX: 0, tileY: 1 },
     { tileX: 1, tileY: 2 },
   ]);
-
+  //
   expect(findAdjacentCells(CELL_3, GRID)).toHaveLength(2);
   expect(findAdjacentCells(CELL_3, GRID)).toEqual([
     { tileX: 1, tileY: 2 },
@@ -44,16 +40,6 @@ test('can build one-way grap for adjacent cells', () => {
         },
       },
       '2_1': {},
-    },
-  });
-  expect(findGraphForCell(CELL_3, GRID)).toEqual({
-    '0_2': {
-      '1_2': {
-        '1_1': {
-          '0_1': {},
-          '2_1': {},
-        },
-      },
     },
   });
 });

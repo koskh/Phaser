@@ -3,7 +3,7 @@ interface IPositionInPixel {
   y: number;
 }
 
-interface IPositionInTile {
+interface IPositionInCell {
   tileX: number;
   tileY: number;
 }
