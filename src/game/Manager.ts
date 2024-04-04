@@ -31,15 +31,15 @@ export default class GameManager {
         await this.destroyTiles(matches);
         await this.fallDownTails();
 
-        this.prevSelectedTile = null;
+        this.setPrevSelect(null);
       } else {
         if (this.prevSelectedTile === null) {
-          this.prevSelectedTile = tile;
+          this.setPrevSelect(tile);
         } else {
           //swap adjacement tiles
           isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
             (await this.swapTwoTiles(this.prevSelectedTile, tile));
-          this.prevSelectedTile = null;
+          this.setPrevSelect(null);
         }
       }
     } else if (this.currentBuster === EBoosterType.TELEPORT) {
@@ -49,7 +49,7 @@ export default class GameManager {
         } else {
           //swap tiles
           await this.swapTwoTiles(this.prevSelectedTile, tile);
-          this.prevSelectedTile = null;
+          this.setPrevSelect(null);
           this.currentBuster = null;
         }
       }
@@ -97,5 +97,12 @@ export default class GameManager {
 
   public setBooster(booster: EBoosterType) {
     this.currentBuster = booster;
+  }
+
+  private setPrevSelect(tile: Tile | null) {
+    tile ? tile.setScale(0.85) : this.prevSelectedTile?.setScale(1);
+    // tile ? tile.setAlpha(0.5) : this.prevSelectedTile?.setAlpha(1);
+
+    this.prevSelectedTile = tile;
   }
 }

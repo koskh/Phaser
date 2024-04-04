@@ -9,7 +9,7 @@ export let ui: Phaser.Scene;
 export default class UI extends Scene {
   teleport: GameObjects.Image;
 
-  // title: GameObjects.Text;
+  // titleCurrentBuster: GameObjects.Text;
 
   constructor() {
     super('UI');
@@ -20,16 +20,6 @@ export default class UI extends Scene {
   preload() {}
 
   create() {
-    // this.title = this.add
-    //   .text(200, INITIAL_BOARD_SCREEN.HEIGHT + 120, 'Reset', {
-    //     fontFamily: 'Arial Black',
-    //     fontSize: 38,
-    //     color: '#ffffff',
-    //     stroke: '#000000',
-    //     strokeThickness: 8,
-    //     align: 'center',
-    //   })
-    //   .setOrigin(0.5);
     const resetBtn = this.add
       .image(85, INITIAL_BOARD_SCREEN.HEIGHT + 120, EAssetsImg.RESET)
       .setDepth(1)
