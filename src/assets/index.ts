@@ -3,6 +3,8 @@ import { TILE } from '../config';
 export enum EAssetsImg {
   BACK_GROUND = 'BACK_GROUND',
   LOGO = 'LOGO',
+  RESET = 'RESET',
+  TELEPORT = 'TELEPORT',
 }
 
 export const ASSETS_IMG: {
@@ -10,6 +12,11 @@ export const ASSETS_IMG: {
 } = {
   [EAssetsImg.BACK_GROUND]: { name: 'bg', url: 'assets/bg.png' },
   [EAssetsImg.LOGO]: { name: 'logo', url: 'assets/logo.png' },
+  [EAssetsImg.RESET]: { name: 'reset_btn', url: 'assets/reset_btn.png' },
+  [EAssetsImg.TELEPORT]: {
+    name: 'teleport_btn',
+    url: 'assets/teleport_btn.png',
+  },
 };
 
 export enum EAssetsSprites {

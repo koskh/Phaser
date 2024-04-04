@@ -70,4 +70,11 @@ export default class GameManager {
     fromTile.updatePositionAndTile(toCell);
     toTile.updatePositionAndTile(fromCell);
   };
+
+  public reset = async () => {
+    const allTiles = this.board.getCurrentMap();
+    await makeScaleAnimation(allTiles.flat() as Tile[]);
+
+    this.board = new Board();
+  };
 }

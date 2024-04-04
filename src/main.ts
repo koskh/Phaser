@@ -1,7 +1,7 @@
 import gameScene from './scenes/GameScene';
 import MenuScene from './scenes/MenuScene';
 
-// import { UI } from './scenes/UI';
+import UI from './scenes/UI';
 
 import { BACKGROUND } from './config';
 
@@ -17,11 +17,7 @@ const config: Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [
-    MenuScene,
-    gameScene,
-    // UI
-  ],
+  scene: [MenuScene, gameScene, UI],
 };
 
 export default new Game(config);

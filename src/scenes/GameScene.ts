@@ -13,6 +13,8 @@ export default class GameScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    this.scene.run('UI');
+
     new GameManager();
   }
 }
