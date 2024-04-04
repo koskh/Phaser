@@ -5,6 +5,7 @@ const RIGHT_VECTOR = [1, 0];
 const LEFT_VECTOR = [-1, 0];
 const UP_VECTOR = [0, 1];
 const DOWN_VECTOR = [0, -1];
+const VECTORS = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
 
 const { ROWS, COLUMNS } = GRID;
 
@@ -67,11 +68,10 @@ export function findAdjacentCells(
   position: IPositionInCell,
   grid: IGameGrid,
 ): IPositionInCell[] {
-  const vectors = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
   const searchedType = grid[position.tileY][position.tileX];
   const adjCells: IPositionInCell[] = [];
 
-  for (const vector of vectors) {
+  for (const vector of VECTORS) {
     const [x, y] = vector;
     const probedTileX = position.tileX + x;
     const probedTileY = position.tileY + y;
@@ -87,4 +87,21 @@ export function findAdjacentCells(
   }
 
   return adjCells;
+}
+
+export function isAdjacentCells(
+  first: IPositionInCell,
+  second: IPositionInCell,
+): boolean {
+  const results: boolean[] = [];
+
+  for (const vector of VECTORS) {
+    const [x, y] = vector;
+    const probedTileX = first.tileX + x;
+    const probedTileY = first.tileY + y;
+
+    results.push(probedTileX === second.tileX && probedTileY === second.tileY);
+  }
+
+  return !results.every((r) => r === false);
 }

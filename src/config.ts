@@ -31,5 +31,10 @@ export const GRID = {
 };
 
 export const VARIATIONS = Object.keys(ETileType).length / 2;
-
 export const MIN_ADJACENTS = 2;
+
+export enum EBoosterType {
+  BOMB,
+  TELEPORT,
+  SUPER,
+}

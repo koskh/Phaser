@@ -5,15 +5,17 @@ import {
   makeMovementAnimation,
   makeScaleAnimation,
 } from '../objects/utilities/animation';
-import { GRID, MIN_ADJACENTS } from '../config';
+import { EBoosterType, GRID, MIN_ADJACENTS } from '../config';
 
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
+import { isAdjacentCells } from './utilities/matches';
 
 export let gameManager: GameManager;
 export default class GameManager {
   board: Board;
   prevSelectedTile: Tile | null = null;
+  currentBuster: EBoosterType | null = null;
 
   constructor() {
     gameManager = this;
@@ -23,18 +25,33 @@ export default class GameManager {
   public async onSelectTile(tile: Tile) {
     const matches = this.board.getTileMatches(tile.cell);
 
-    if (matches.length >= MIN_ADJACENTS) {
-      await this.destroyTiles(matches);
-      await this.fallDownTails();
+    //default
+    if (this.currentBuster === null) {
+      if (matches.length >= MIN_ADJACENTS) {
+        await this.destroyTiles(matches);
+        await this.fallDownTails();
 
-      this.prevSelectedTile = null;
-    } else {
-      if (this.prevSelectedTile === null) {
-        this.prevSelectedTile = tile;
-      } else {
-        //swap asjacents tiles
-        await this.swapTwoTiles(this.prevSelectedTile, tile);
         this.prevSelectedTile = null;
+      } else {
+        if (this.prevSelectedTile === null) {
+          this.prevSelectedTile = tile;
+        } else {
+          //swap adjacement tiles
+          isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
+            (await this.swapTwoTiles(this.prevSelectedTile, tile));
+          this.prevSelectedTile = null;
+        }
+      }
+    } else if (this.currentBuster === EBoosterType.TELEPORT) {
+      if (this.currentBuster === EBoosterType.TELEPORT) {
+        if (this.prevSelectedTile === null) {
+          this.prevSelectedTile = tile;
+        } else {
+          //swap tiles
+          await this.swapTwoTiles(this.prevSelectedTile, tile);
+          this.prevSelectedTile = null;
+          this.currentBuster = null;
+        }
       }
     }
   }
@@ -77,4 +94,8 @@ export default class GameManager {
 
     this.board = new Board();
   };
+
+  public setBooster(booster: EBoosterType) {
+    this.currentBuster = booster;
+  }
 }

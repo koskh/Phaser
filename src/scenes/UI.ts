@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import { Scene, GameObjects } from 'phaser';
-import {
-  ASSETS_IMG,
-  ASSETS_SPRITES,
-  EAssetsImg,
-  EAssetsSprites,
-} from '../assets';
-import { INITIAL_BOARD_SCREEN } from '../config';
+import { GameObjects, Scene } from 'phaser';
+import { EAssetsImg } from '../assets';
+import { EBoosterType, INITIAL_BOARD_SCREEN } from '../config';
 import { gameManager } from '../game/Manager';
 
 export let ui: Phaser.Scene;
@@ -49,6 +44,8 @@ export default class UI extends Scene {
       .setOrigin(0, 0)
       .setScale(0.5);
     teleportBtn.setInteractive({ useHandCursor: true });
-    // teleportBtn.on('pointerup', () => gameManager.reset());
+    teleportBtn.on('pointerup', () =>
+      gameManager.setBooster(EBoosterType.TELEPORT),
+    );
   }
 }
