@@ -10,10 +10,12 @@ import { EBoosterType, GRID, MIN_ADJACENTS } from '../config';
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 import { isAdjacentCells } from './utilities/matches';
+import UI, { boosterText, scoreText, ui } from '../objects/utilities/UI';
 
 export let gameManager: GameManager;
 export default class GameManager {
   board: Board;
+  ui: UI;
   prevSelectedTile: Tile | null = null;
   currentBuster: EBoosterType | null = null;
 
@@ -28,10 +30,10 @@ export default class GameManager {
     //default
     if (this.currentBuster === null) {
       if (matches.length >= MIN_ADJACENTS) {
+        this.setPrevSelect(null);
+
         await this.destroyTiles(matches);
         await this.fallDownTails();
-
-        this.setPrevSelect(null);
       } else {
         if (this.prevSelectedTile === null) {
           this.setPrevSelect(tile);
@@ -50,7 +52,7 @@ export default class GameManager {
           //swap tiles
           await this.swapTwoTiles(this.prevSelectedTile, tile);
           this.setPrevSelect(null);
-          this.currentBuster = null;
+          this.setBooster(null);
         }
       }
     }
@@ -95,13 +97,15 @@ export default class GameManager {
     this.board = new Board();
   };
 
-  public setBooster(booster: EBoosterType) {
+  public setBooster(booster: EBoosterType | null) {
+    boosterText.setText(
+      `Booster: ${booster === null ? 'none' : EBoosterType[booster]}`,
+    );
     this.currentBuster = booster;
   }
 
   private setPrevSelect(tile: Tile | null) {
-    tile ? tile.setScale(0.85) : this.prevSelectedTile?.setScale(1);
-    // tile ? tile.setAlpha(0.5) : this.prevSelectedTile?.setAlpha(1);
+    tile ? tile.setAlpha(0.5) : this.prevSelectedTile?.setAlpha(1);
 
     this.prevSelectedTile = tile;
   }

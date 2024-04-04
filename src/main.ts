@@ -1,7 +1,7 @@
 import gameScene from './scenes/GameScene';
 import MenuScene from './scenes/MenuScene';
 
-import UI from './scenes/UI';
+import UI from './objects/utilities/UI';
 
 import { BACKGROUND } from './config';
 
