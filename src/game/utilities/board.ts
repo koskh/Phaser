@@ -16,13 +16,10 @@ export function getNewTilesGrid(
   variations: number,
 ): IGameGrid {
   const grid: IGameGrid = [];
-
-  console.log(variations);
-
   for (let row = 0; row < rows; row++) {
     for (let column = 0; column < cols; column++) {
       !grid[row]?.length && (grid[row] = []);
-      const variation = Phaser.Math.Between(1, variations);
+      const variation = Phaser.Math.Between(1, variations - 1);
 
       grid[row].push(variation);
     }

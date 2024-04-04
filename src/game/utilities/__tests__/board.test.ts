@@ -1,4 +1,9 @@
-import { getRandomBoard, getTestTilesGrid, getTilesGrid } from '../board';
+import {
+  getRandomBoard,
+  getTestTilesGrid,
+  getNewTilesGrid,
+  getTilesGrid,
+} from '../board';
 import { ETileType } from '../../../config';
 
 jest.mock('../../../objects/Tile');
@@ -6,13 +11,25 @@ jest.mock('../../../objects/Tile');
 const TEST_GRID = {
   ROWS: 3,
   COLUMNS: 3,
+  VARIATIONS: 4,
 };
 
 test('can generate pseudo grid', () => {
   expect(getTestTilesGrid()).toHaveLength(TEST_GRID.ROWS);
   expect(getTestTilesGrid()[0]).toHaveLength(TEST_GRID.COLUMNS);
-
   expect(getTestTilesGrid()[0][0]).toEqual(ETileType.RED); // TODO: need mock
+});
+
+test('can generate new random grid', () => {
+  const grid = getNewTilesGrid(
+    TEST_GRID.ROWS,
+    TEST_GRID.COLUMNS,
+    TEST_GRID.VARIATIONS,
+  );
+  expect(grid).toHaveLength(TEST_GRID.ROWS);
+  expect(grid[0]).toHaveLength(TEST_GRID.COLUMNS);
+
+  expect(grid[0][0]).not.toBeUndefined();
 });
 test('can generate random board', () => {
   const grid = getTestTilesGrid();
