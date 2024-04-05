@@ -49,9 +49,9 @@ export default class GameManager {
   }
 
   public async onSelectTile(tile: Tile) {
+    // TODO: nedd refacttoring
     const matches = this.board.getTileMatches(tile.cell);
 
-    //default
     if (this.currentBuster === null) {
       if (matches.length >= MIN_ADJACENTS) {
         await this.destroyTiles(matches);
@@ -113,8 +113,10 @@ export default class GameManager {
     const fromCell = { ...fromTile.cell };
     const toCell = { ...toTile.cell };
 
-    makeMovementAnimation(fromTile, tileToPosition(toCell));
-    makeMovementAnimation(toTile, tileToPosition(fromCell));
+    await Promise.all([
+      makeMovementAnimation(fromTile, tileToPosition(toCell)),
+      makeMovementAnimation(toTile, tileToPosition(fromCell)),
+    ]);
 
     fromTile.updatePositionAndTile(toCell);
     toTile.updatePositionAndTile(fromCell);
