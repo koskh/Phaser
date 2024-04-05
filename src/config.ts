@@ -7,6 +7,8 @@ export const BACKGROUND = {
   HEIGHT: 1720,
 };
 
+export const DEFAULT_SCALE = 0.5;
+
 export const HALF_SCREEN = {
   WIDTH: BACKGROUND.WIDHT / 2,
   HEIGHT: BACKGROUND.HEIGHT / 2,
