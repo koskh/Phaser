@@ -10,14 +10,21 @@ import {
   EBoosterType,
   GRID,
   HAS_MINIMAL_ONCE_GAME,
+  INITIAL_MOVES,
   INITIAL_RESETS,
   MIN_ADJACENTS,
+  WIN_SCORE,
 } from '../config';
 
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 import { isAdjacentCells } from './utilities/matches';
-import UI, { boosterText, resetText } from '../objects/utilities/UI';
+import UI, {
+  boosterText,
+  resetText,
+  moveText,
+  scoreText,
+} from '../objects/utilities/UI';
 import { gameScene } from '../scenes/GameScene';
 
 export let gameManager: GameManager;
@@ -27,6 +34,8 @@ export default class GameManager {
   prevSelectedTile: Tile | null = null;
   currentBuster: EBoosterType | null = null;
   resets: number;
+  score: number = 0;
+  moves: number = INITIAL_MOVES;
   constructor() {
     gameManager = this;
     this.board = new Board();
@@ -48,17 +57,20 @@ export default class GameManager {
         await this.destroyTiles(matches);
         await this.fallDownTails();
         this.setPrevSelect(null);
-      } else {
-        if (this.prevSelectedTile === null) {
-          this.setPrevSelect(tile);
-        } else {
-          //swap adjacement tiles
-          CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES &&
-            isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
-            (await this.swapTwoTiles(this.prevSelectedTile, tile));
-          this.setPrevSelect(null);
-        }
+
+        this.makeTurn(matches.length);
       }
+      // else {
+      //   if (this.prevSelectedTile === null) {
+      //     this.setPrevSelect(tile);
+      //   } else {
+      //     //swap adjacement tiles
+      //     CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES &&
+      //       isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
+      //       (await this.swapTwoTiles(this.prevSelectedTile, tile));
+      //     this.setPrevSelect(null);
+      //   }
+      // }
     } else if (this.currentBuster === EBoosterType.TELEPORT) {
       if (this.prevSelectedTile === null) {
         this.setPrevSelect(tile);
@@ -69,8 +81,6 @@ export default class GameManager {
         this.setBooster(null);
       }
     }
-
-    // console.log('board is playable', this.board.isPlayable());
 
     if (!this.board.isPlayable()) {
       await new Promise((r) => setTimeout(r, 1000)); // for visual pause after update board
@@ -138,8 +148,23 @@ export default class GameManager {
     this.prevSelectedTile = tile;
   }
 
+  private makeTurn(score: number) {
+    this.score = this.score + score;
+    this.moves = this.moves - 1;
+
+    if (this.moves > 0 && this.score < WIN_SCORE) {
+      scoreText.setText(`Score: ${this.score}`);
+      moveText.setText(`Score: ${this.moves}`);
+    } else {
+      this.makeGameOver();
+    }
+  }
+
   private makeGameOver() {
     gameScene.scene.stop('UI');
-    gameScene.scene.start('GameOverScene');
+    gameScene.scene.start('GameOverScene', {
+      score: this.score,
+      isWin: this.moves > 0 && this.resets > 0,
+    });
   }
 }

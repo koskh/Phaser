@@ -7,11 +7,40 @@ export default class GameOverScene extends Scene {
 
   preload() {}
 
-  create() {
+  create({ score, isWin }: { score: number; isWin: boolean }) {
     this.add
-      .text(this.sys.canvas.width / 2, 460, 'Game over', {
+      .text(this.sys.canvas.width / 2, 300, 'Game over', {
         fontFamily: 'Arial Black',
-        fontSize: 64,
+        fontSize: 72,
+        color: '#ffffff',
+        stroke: '#000000',
+        strokeThickness: 8,
+        align: 'center',
+      })
+      .setOrigin(0.5);
+
+    this.cameras.main.setBackgroundColor(isWin ? '#1dce1d' : '#e31c1c');
+
+    this.add
+      .text(
+        this.sys.canvas.width / 2,
+        460,
+        `You are ${isWin ? 'win' : ' lose'}`,
+        {
+          fontFamily: 'Arial Black',
+          fontSize: 72,
+          color: '#ffffff',
+          stroke: '#000000',
+          strokeThickness: 8,
+          align: 'center',
+        },
+      )
+      .setOrigin(0.5);
+
+    this.add
+      .text(this.sys.canvas.width / 2, 520, `Your score is: ${score}`, {
+        fontFamily: 'Arial Black',
+        fontSize: 42,
         color: '#ffffff',
         stroke: '#000000',
         strokeThickness: 8,
@@ -20,7 +49,7 @@ export default class GameOverScene extends Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(this.sys.canvas.width / 2, 520, 'Click here to restart', {
+      .text(this.sys.canvas.width / 2, 720, 'Click  to restart', {
         fontFamily: 'Arial Black',
         fontSize: 42,
         color: '#ffffff',

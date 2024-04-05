@@ -4,12 +4,13 @@ import { EAssetsImg } from '../../assets';
 import {
   EBoosterType,
   INITIAL_BOARD_SCREEN,
+  INITIAL_MOVES,
   INITIAL_RESETS,
 } from '../../config';
 import { gameManager } from '../../game/Manager';
 
 export let scoreText: GameObjects.Text,
-  movieText: GameObjects.Text,
+  moveText: GameObjects.Text,
   resetText: GameObjects.Text,
   boosterText: GameObjects.Text;
 export let teleportBtn: GameObjects.Image;
@@ -47,18 +48,18 @@ export default class UI extends Phaser.Scene {
     );
 
     scoreText = this.add
-      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 250, 'Score: _', {
+      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 250, 'Score: 0', {
         font: 'bold 53px Geneva',
       })
       .setDepth(1);
-    movieText = this.add.text(
-      50,
-      INITIAL_BOARD_SCREEN.HEIGHT - 200,
-      'Moves: _',
-      {
-        font: 'bold 53px Geneva',
-      },
-    );
+      moveText = this.add.text(
+        50,
+        INITIAL_BOARD_SCREEN.HEIGHT - 200,
+        `Moves: ${INITIAL_MOVES}`,
+        {
+          font: 'bold 53px Geneva',
+        },
+      );
     boosterText = this.add
       .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 150, 'Booster: none', {
         font: 'bold 53px Geneva',
