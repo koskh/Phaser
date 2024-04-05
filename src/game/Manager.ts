@@ -163,6 +163,7 @@ export default class GameManager {
     gameScene.scene.stop('UI');
     gameScene.scene.start('GameOverScene', {
       score: this.score,
+      turns: INITIAL_TURNS - this.turns,
       isWin: this.turns > 0 && this.resets > 0,
     });
   }

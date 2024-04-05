@@ -7,7 +7,15 @@ export default class GameOverScene extends Scene {
 
   preload() {}
 
-  create({ score, isWin }: { score: number; isWin: boolean }) {
+  create({
+    score,
+    turns,
+    isWin,
+  }: {
+    score: number;
+    turns: number;
+    isWin: boolean;
+  }) {
     // this.add
     //   .text(this.sys.canvas.width / 2, 300, 'Game over', {
     //     fontFamily: 'Arial Black',
@@ -38,14 +46,19 @@ export default class GameOverScene extends Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(this.sys.canvas.width / 2, 520, `Your score is: ${score}`, {
-        fontFamily: 'Arial Black',
-        fontSize: 42,
-        color: '#ffffff',
-        stroke: '#000000',
-        strokeThickness: 8,
-        align: 'center',
-      })
+      .text(
+        this.sys.canvas.width / 2,
+        520,
+        `Your score is: ${score} for ${turns} turns`,
+        {
+          fontFamily: 'Arial Black',
+          fontSize: 42,
+          color: '#ffffff',
+          stroke: '#000000',
+          strokeThickness: 8,
+          align: 'center',
+        },
+      )
       .setOrigin(0.5);
 
     this.add
