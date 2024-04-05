@@ -18,11 +18,21 @@ export default class GameScene extends Phaser.Scene {
     this.add
       .image(
         INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH,
-        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT,
+        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT * 1.125,
+        EAssetsImg.BACKYARD_TOP,
+      )
+      .setOrigin(0, 0)
+      .setScale(0.85)
+      .setDepth(20);
+
+    this.add
+      .image(
+        INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH,
+        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT * 0.75,
         EAssetsImg.BACKYARD,
       )
       .setOrigin(0, 0)
-      .setScale(0.75)
+      .setScale(0.85)
       .setDepth(1);
 
     this.scene.run('UI');

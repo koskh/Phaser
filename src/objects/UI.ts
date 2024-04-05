@@ -26,7 +26,7 @@ export default class UI extends Phaser.Scene {
 
   create() {
     const scoreBlockX = HALF_SCREEN.WIDTH + 300,
-      scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 300;
+      scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 275;
 
     this.add
       .image(scoreBlockX, scoreBlockY, EAssetsImg.SCORE)

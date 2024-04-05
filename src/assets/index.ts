@@ -8,6 +8,7 @@ export enum EAssetsImg {
   TURNS = 'TURNS',
   SCORE = 'SCORE',
   BACKYARD = 'BACKYARD',
+  BACKYARD_TOP = 'BACKYARD_TOP',
 }
 
 export const ASSETS_IMG: {
@@ -23,6 +24,10 @@ export const ASSETS_IMG: {
   [EAssetsImg.TURNS]: { name: 'turns_bg', url: 'assets/moves_bg.png' },
   [EAssetsImg.SCORE]: { name: 'score_bg', url: 'assets/score_bg.png' },
   [EAssetsImg.BACKYARD]: { name: 'backyard', url: 'assets/backyard.png' },
+  [EAssetsImg.BACKYARD_TOP]: {
+    name: 'backyard_top',
+    url: 'assets/backyard_up.png',
+  },
 };
 
 export enum EAssetsSprites {
