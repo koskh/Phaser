@@ -26,6 +26,7 @@ import UI, {
   scoreText,
 } from '../objects/utilities/UI';
 import { gameScene } from '../scenes/GameScene';
+import { getScore } from './utilities/game';
 
 export let gameManager: GameManager;
 export default class GameManager {
@@ -44,7 +45,6 @@ export default class GameManager {
     while (HAS_MINIMAL_ONCE_GAME && !this.board.isPlayable()) {
       // we want gamer has minimal once game
       this.board.resetBoard();
-      // this.board = new Board();
     }
   }
 
@@ -58,7 +58,7 @@ export default class GameManager {
         await this.fallDownTails();
         this.setPrevSelect(null);
 
-        this.makeTurn(matches.length);
+        this.makeTurn(getScore(matches.length));
       }
       // else {
       //   if (this.prevSelectedTile === null) {

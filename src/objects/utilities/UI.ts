@@ -29,13 +29,13 @@ export default class UI extends Phaser.Scene {
   preload() {}
 
   create() {
-    const resetBtn = this.add
-      .image(85, INITIAL_BOARD_SCREEN.HEIGHT + 120, EAssetsImg.RESET)
-      .setDepth(1)
-      .setOrigin(0, 0)
-      .setScale(0.5);
-    resetBtn.setInteractive({ useHandCursor: true });
-    resetBtn.on('pointerup', () => gameManager.reset());
+    // const resetBtn = this.add
+    //   .image(85, INITIAL_BOARD_SCREEN.HEIGHT + 120, EAssetsImg.RESET)
+    //   .setDepth(1)
+    //   .setOrigin(0, 0)
+    //   .setScale(0.5);
+    // resetBtn.setInteractive({ useHandCursor: true });
+    // resetBtn.on('pointerup', () => gameManager.reset());
 
     teleportBtn = this.add
       .image(85, INITIAL_BOARD_SCREEN.HEIGHT + 360, EAssetsImg.TELEPORT)
@@ -52,14 +52,14 @@ export default class UI extends Phaser.Scene {
         font: 'bold 53px Geneva',
       })
       .setDepth(1);
-      moveText = this.add.text(
-        50,
-        INITIAL_BOARD_SCREEN.HEIGHT - 200,
-        `Moves: ${INITIAL_MOVES}`,
-        {
-          font: 'bold 53px Geneva',
-        },
-      );
+    moveText = this.add.text(
+      50,
+      INITIAL_BOARD_SCREEN.HEIGHT - 200,
+      `Moves: ${INITIAL_MOVES}`,
+      {
+        font: 'bold 53px Geneva',
+      },
+    );
     boosterText = this.add
       .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 150, 'Booster: none', {
         font: 'bold 53px Geneva',
