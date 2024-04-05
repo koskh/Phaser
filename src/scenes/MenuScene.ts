@@ -5,6 +5,7 @@ import {
   EAssetsImg,
   EAssetsSprites,
 } from '../assets';
+import { HALF_SCREEN } from '../config';
 
 export default class MenuScene extends Scene {
   background: GameObjects.Image;
@@ -16,6 +17,8 @@ export default class MenuScene extends Scene {
   }
 
   preload() {
+    this.showProgressBar();
+
     Object.keys(ASSETS_IMG).map((assetKey) => {
       const { url } = ASSETS_IMG[assetKey as EAssetsImg];
       this.load.image(assetKey, url);
@@ -31,23 +34,24 @@ export default class MenuScene extends Scene {
     });
   }
   create() {
-    this.logo = this.add.image(this.sys.canvas.width / 2, 300, EAssetsImg.LOGO);
-
-    this.title = this.add
-      .text(this.sys.canvas.width / 2, 460, 'Click here to start game', {
-        fontFamily: 'Arial Black',
-        fontSize: 38,
-        color: '#ffffff',
-        stroke: '#000000',
-        strokeThickness: 8,
-        align: 'center',
-      })
-      .setOrigin(0.5);
-
     this.scene.start('Game');
+  }
 
-    // this.input.once('pointerdown', () => {
-    //   this.scene.start('Game');
-    // });
+  showProgressBar() {
+    const { width: w, height: h } = this.textures
+      .get(EAssetsImg.PROGRESS_BAR)
+      .get();
+
+    const img = this.add
+      .sprite(
+        HALF_SCREEN.WIDTH - w / 2,
+        HALF_SCREEN.WIDTH - h / 2,
+        EAssetsImg.PROGRESS_BAR,
+      )
+      .setOrigin(0);
+
+    this.load.on('progress', (v: number) =>
+      img.setCrop(0, 0, Math.ceil(v * w), h),
+    );
   }
 }

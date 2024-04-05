@@ -2,6 +2,7 @@
 import { GameObjects } from 'phaser';
 import { EAssetsImg } from '../assets';
 import {
+  DEFAULT_SCALE,
   EBoosterType,
   HALF_SCREEN,
   INITIAL_BOARD_SCREEN,
@@ -32,7 +33,7 @@ export default class UI extends Phaser.Scene {
       .image(scoreBlockX, scoreBlockY, EAssetsImg.SCORE)
       .setDepth(1)
       .setOrigin(0.5)
-      .setScale(0.5);
+      .setScale(DEFAULT_SCALE);
 
     scoreText = this.add
       .text(scoreBlockX, scoreBlockY, '0', {
@@ -48,7 +49,7 @@ export default class UI extends Phaser.Scene {
       .image(turnsBlockX, turnsBlockY, EAssetsImg.TURNS)
       .setDepth(1)
       .setOrigin(0.5)
-      .setScale(0.5);
+      .setScale(DEFAULT_SCALE);
 
     turnText = this.add
       .text(turnsBlockX, turnsBlockY, `${INITIAL_TURNS}`, {
@@ -79,7 +80,7 @@ export default class UI extends Phaser.Scene {
       .image(teleportBlockX, teleportBlockY, EAssetsImg.BOOSTER)
       .setDepth(1)
       .setOrigin(0.5)
-      .setScale(0.5);
+      .setScale(DEFAULT_SCALE);
     teleportBtn.setInteractive({ useHandCursor: true });
     teleportBtn.on('pointerup', () =>
       gameManager.setBooster(EBoosterType.TELEPORT),

@@ -16,18 +16,20 @@ export default class GameOverScene extends Scene {
     turns: number;
     isWin: boolean;
   }) {
-    // this.add
-    //   .text(this.sys.canvas.width / 2, 300, 'Game over', {
-    //     fontFamily: 'Arial Black',
-    //     fontSize: 72,
-    //     color: '#ffffff',
-    //     stroke: '#000000',
-    //     strokeThickness: 8,
-    //     align: 'center',
-    //   })
-    //   .setOrigin(0.5);
+      const winColor = '#1dce1d';
+      const loseColor = '#e31c1c';
 
-    this.cameras.main.setBackgroundColor(isWin ? '#1dce1d' : '#e31c1c');
+      this.add
+        .text(this.sys.canvas.width / 2, 300, 'Game over', {
+          fontFamily: 'Arial Black',
+          fontSize: 72,
+          color: '#ffffff',
+          stroke: '#000000',
+          strokeThickness: 8,
+          align: 'center',
+        })
+        .setOrigin(0.5)
+        .setColor(isWin ? winColor : loseColor);
 
     this.add
       .text(
@@ -43,7 +45,8 @@ export default class GameOverScene extends Scene {
           align: 'center',
         },
       )
-      .setOrigin(0.5);
+      .setOrigin(0.5)
+      .setColor(isWin ? winColor : loseColor);
 
     this.add
       .text(
@@ -59,7 +62,8 @@ export default class GameOverScene extends Scene {
           align: 'center',
         },
       )
-      .setOrigin(0.5);
+      .setOrigin(0.5)
+      .setColor(isWin ? winColor : loseColor);
 
     this.add
       .text(this.sys.canvas.width / 2, 720, 'Click  to restart', {

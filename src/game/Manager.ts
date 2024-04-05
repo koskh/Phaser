@@ -6,6 +6,7 @@ import {
   makeScaleAnimation,
 } from '../objects/utilities/animation';
 import {
+  DEFAULT_SCALE,
   EBoosterType,
   GRID,
   HAS_MINIMAL_ONCE_GAME,
@@ -133,9 +134,9 @@ export default class GameManager {
   public setBooster(booster: EBoosterType | null) {
     if (booster === EBoosterType.TELEPORT) {
       // TODO: need refactoring
-      teleportBtn.setScale(0.6);
+      teleportBtn.setScale(DEFAULT_SCALE + 0.1);
     } else {
-      teleportBtn.setScale(0.5);
+      teleportBtn.setScale(DEFAULT_SCALE);
     }
 
     this.currentBuster = booster;
