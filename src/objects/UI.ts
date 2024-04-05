@@ -57,6 +57,14 @@ export default class UI extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(2);
 
+    this.add.rectangle(
+      HALF_SCREEN.WIDTH,
+      INITIAL_BOARD_SCREEN.HEIGHT - 290,
+      INITIAL_BOARD_SCREEN.WIDTH * 3,
+      200,
+      0xa1a1a1,
+    );
+
     const teleportBlockX = 170,
       teleportBlockY = INITIAL_BOARD_SCREEN.HEIGHT + 360;
 

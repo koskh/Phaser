@@ -18,7 +18,7 @@ export default class GameScene extends Phaser.Scene {
     this.add
       .image(
         INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH,
-        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT * 1.125,
+        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT * 1.05,
         EAssetsImg.BACKYARD_TOP,
       )
       .setOrigin(0, 0)
@@ -28,7 +28,7 @@ export default class GameScene extends Phaser.Scene {
     this.add
       .image(
         INITIAL_BOARD_SCREEN.WIDTH - TILE.WIDTH,
-        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT * 0.75,
+        INITIAL_BOARD_SCREEN.HEIGHT - TILE.HEIGHT * 0.55,
         EAssetsImg.BACKYARD,
       )
       .setOrigin(0, 0)
