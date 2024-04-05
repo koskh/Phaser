@@ -6,7 +6,7 @@ import {
   getTestTilesGrid,
   getTilesGrid,
 } from './utilities/board';
-import findMatches from './utilities/matches';
+import { findMatches, hasMatches } from './utilities/matches';
 import { ETileType, GRID, VARIATIONS } from '../config';
 
 export interface IGameGrid extends Array<Array<ETileType | null>> {}
@@ -27,7 +27,6 @@ export default class Board {
     const tilesGrid: IGameGrid = getNewTilesGrid(GRID.ROWS, GRID.COLUMNS);
 
     const board: IGameBoard = getNewBoard(tilesGrid);
-
     this.current = board;
   }
 
@@ -53,5 +52,10 @@ export default class Board {
 
   public setTile(newTile: Tile | null, positionInTile: IPositionInCell) {
     this.current[positionInTile.tileY][positionInTile.tileX] = newTile;
+  }
+
+  public isPlayable(): boolean {
+    const grid = this.getCurrentGrid();
+    return hasMatches(grid);
   }
 }

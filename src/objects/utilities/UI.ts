@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { GameObjects, Scene } from 'phaser';
 import { EAssetsImg } from '../../assets';
-import { EBoosterType, INITIAL_BOARD_SCREEN } from '../../config';
+import {
+  EBoosterType,
+  INITIAL_BOARD_SCREEN,
+  INITIAL_RESETS,
+} from '../../config';
 import { gameManager } from '../../game/Manager';
 
 export let scoreText: GameObjects.Text,
@@ -61,9 +65,14 @@ export default class UI extends Phaser.Scene {
       })
       .setDepth(1);
     resetText = this.add
-      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 100, 'Resets: _', {
-        font: 'bold 53px Geneva',
-      })
+      .text(
+        50,
+        INITIAL_BOARD_SCREEN.HEIGHT - 100,
+        `Resets: ${INITIAL_RESETS}`,
+        {
+          font: 'bold 53px Geneva',
+        },
+      )
       .setDepth(1);
   }
 }

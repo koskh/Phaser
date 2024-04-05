@@ -5,12 +5,19 @@ import {
   makeMovementAnimation,
   makeScaleAnimation,
 } from '../objects/utilities/animation';
-import { EBoosterType, GRID, MIN_ADJACENTS } from '../config';
+import {
+  CAN_SWAP_TWO_ADJACENT_TILES,
+  EBoosterType,
+  GRID,
+  INITIAL_RESETS,
+  MIN_ADJACENTS,
+} from '../config';
 
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 import { isAdjacentCells } from './utilities/matches';
-import UI, { boosterText, scoreText, ui } from '../objects/utilities/UI';
+import UI, { boosterText, resetText } from '../objects/utilities/UI';
+import { gameScene } from '../scenes/GameScene';
 
 export let gameManager: GameManager;
 export default class GameManager {
@@ -18,10 +25,16 @@ export default class GameManager {
   ui: UI;
   prevSelectedTile: Tile | null = null;
   currentBuster: EBoosterType | null = null;
-
+  resets: number;
   constructor() {
     gameManager = this;
     this.board = new Board();
+    this.resets = INITIAL_RESETS;
+
+    while (!this.board.isPlayable()) {
+      // we want gamer has minimal once game
+      this.board = new Board();
+    }
   }
 
   public async onSelectTile(tile: Tile) {
@@ -39,7 +52,8 @@ export default class GameManager {
           this.setPrevSelect(tile);
         } else {
           //swap adjacement tiles
-          isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
+          CAN_SWAP_TWO_ADJACENT_TILES &&
+            isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
             (await this.swapTwoTiles(this.prevSelectedTile, tile));
           this.setPrevSelect(null);
         }
@@ -56,6 +70,8 @@ export default class GameManager {
         }
       }
     }
+
+    console.log('board has MATCHES', this.board.isPlayable());
   }
 
   private destroyTiles = async (
@@ -94,7 +110,16 @@ export default class GameManager {
     const allTiles = this.board.getCurrentMap();
     await makeScaleAnimation(allTiles.flat() as Tile[]);
 
-    this.board = new Board();
+    this.resets = this.resets - 1;
+
+    if (this.resets > 0) {
+      resetText.setText(`Resets: ${this.resets}`);
+      this.board = new Board();
+    } else {
+      this.makeGameOver();
+    }
+
+    console.log('board has MATCHES', this.board.isPlayable());
   };
 
   public setBooster(booster: EBoosterType | null) {
@@ -108,5 +133,10 @@ export default class GameManager {
     tile ? tile.setAlpha(0.5) : this.prevSelectedTile?.setAlpha(1);
 
     this.prevSelectedTile = tile;
+  }
+
+  private makeGameOver() {
+    // gameScene.scene.remove('UI');
+    gameScene.scene.start('GameOverScene');
   }
 }

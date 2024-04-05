@@ -1,5 +1,6 @@
 import { ETileType, GRID } from '../../config';
-import { IGameGrid } from '../Board';
+import { IGameBoard, IGameGrid } from '../Board';
+import { getNewTileType } from './board';
 
 const RIGHT_VECTOR = [1, 0];
 const LEFT_VECTOR = [-1, 0];
@@ -9,7 +10,19 @@ const VECTORS = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
 
 const { ROWS, COLUMNS } = GRID;
 
-export default function findMatches(
+export function hasMatches(grid: IGameGrid): boolean {
+  let hasMatches = false;
+
+  for (let row = 0; row < GRID.ROWS && !hasMatches; row++) {
+    for (let column = 0; column < GRID.COLUMNS && !hasMatches; column++) {
+      hasMatches = findMatches({ tileX: column, tileY: row }, grid).length > 1;
+    }
+  }
+
+  return hasMatches;
+}
+
+export function findMatches(
   position: IPositionInCell,
   grid: IGameGrid,
 ): IPositionInCell[] {

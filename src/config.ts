@@ -26,8 +26,8 @@ export enum ETileType {
 }
 
 export const GRID = {
-  ROWS: 7,
-  COLUMNS: 7,
+  ROWS: 3,
+  COLUMNS: 3,
 };
 
 export const VARIATIONS = Object.keys(ETileType).length / 2;
@@ -38,3 +38,6 @@ export enum EBoosterType {
   TELEPORT = 'TELEPORT',
   SUPER = 'SUPER',
 }
+
+export const CAN_SWAP_TWO_ADJACENT_TILES = false;
+export const INITIAL_RESETS = 3;
