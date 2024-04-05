@@ -14,7 +14,7 @@ export const HALF_SCREEN = {
 
 export const INITIAL_BOARD_SCREEN = {
   WIDTH: HALF_SCREEN.WIDTH / 2,
-  HEIGHT: 300,
+  HEIGHT: HALF_SCREEN.HEIGHT / 2,
 };
 
 export enum ETileType {
@@ -32,8 +32,8 @@ export enum EBoosterType {
 }
 
 export const GRID = {
-  ROWS: 7,
-  COLUMNS: 7,
+  ROWS: 4,
+  COLUMNS: 4,
 };
 
 export const VARIATIONS = Object.keys(ETileType).length / 2;

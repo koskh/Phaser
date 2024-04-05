@@ -18,7 +18,7 @@ import {
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 
-import UI, { scoreText, teleportBtn, turnText } from '../objects/utilities/UI';
+import UI, { scoreText, teleportBtn, turnText } from '../objects/UI';
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';
 

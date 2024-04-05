@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { GameObjects } from 'phaser';
-import { EAssetsImg } from '../../assets';
+import { EAssetsImg } from '../assets';
 import {
   EBoosterType,
   HALF_SCREEN,
   INITIAL_BOARD_SCREEN,
   INITIAL_TURNS,
-} from '../../config';
-import { gameManager } from '../../game/Manager';
+} from '../config';
+import { gameManager } from '../game/Manager';
 
 export let scoreText: GameObjects.Text,
   turnText: GameObjects.Text,
@@ -26,7 +26,7 @@ export default class UI extends Phaser.Scene {
 
   create() {
     const scoreBlockX = HALF_SCREEN.WIDTH + 300,
-      scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 200;
+      scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 300;
 
     this.add
       .image(scoreBlockX, scoreBlockY, EAssetsImg.SCORE)

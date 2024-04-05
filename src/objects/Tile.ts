@@ -15,7 +15,7 @@ export default class Tile extends Phaser.GameObjects.Sprite {
     const { x, y } = tileToPosition(tilePos);
 
     super(gameScene, x, y, EAssetsSprites.TILES, tileType);
-    gameScene.add.existing(this).setDepth(1).setOrigin(0.5, 0.5);
+    gameScene.add.existing(this).setDepth(10).setOrigin(0.5, 0.5);
 
     this.position = { x, y };
     this.cell = tilePos;
