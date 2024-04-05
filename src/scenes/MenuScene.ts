@@ -38,16 +38,12 @@ export default class MenuScene extends Scene {
   }
 
   showProgressBar() {
-    const { width: w, height: h } = this.textures
-      .get(EAssetsImg.PROGRESS_BAR)
-      .get();
+    const textureKey = 'progress_bar';
+
+    const { width: w, height: h } = this.textures.get(textureKey).get();
 
     const img = this.add
-      .sprite(
-        HALF_SCREEN.WIDTH - w / 2,
-        HALF_SCREEN.WIDTH - h / 2,
-        EAssetsImg.PROGRESS_BAR,
-      )
+      .image(HALF_SCREEN.WIDTH - w / 2, HALF_SCREEN.WIDTH - h / 2, textureKey)
       .setOrigin(0);
 
     this.load.on('progress', (v: number) =>

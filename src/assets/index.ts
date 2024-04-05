@@ -9,7 +9,6 @@ export enum EAssetsImg {
   SCORE = 'SCORE',
   BACKYARD = 'BACKYARD',
   BACKYARD_TOP = 'BACKYARD_TOP',
-  PROGRESS_BAR = 'PROGRESS_BAR',
 }
 
 export const ASSETS_IMG: {
@@ -28,10 +27,6 @@ export const ASSETS_IMG: {
   [EAssetsImg.BACKYARD_TOP]: {
     name: 'backyard_top',
     url: 'assets/backyard_up.png',
-  },
-  [EAssetsImg.PROGRESS_BAR]: {
-    name: 'backyard',
-    url: 'assets/progress-bar.png',
   },
 };
 
