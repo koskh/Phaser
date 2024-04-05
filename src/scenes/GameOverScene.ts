@@ -8,16 +8,16 @@ export default class GameOverScene extends Scene {
   preload() {}
 
   create({ score, isWin }: { score: number; isWin: boolean }) {
-    this.add
-      .text(this.sys.canvas.width / 2, 300, 'Game over', {
-        fontFamily: 'Arial Black',
-        fontSize: 72,
-        color: '#ffffff',
-        stroke: '#000000',
-        strokeThickness: 8,
-        align: 'center',
-      })
-      .setOrigin(0.5);
+    // this.add
+    //   .text(this.sys.canvas.width / 2, 300, 'Game over', {
+    //     fontFamily: 'Arial Black',
+    //     fontSize: 72,
+    //     color: '#ffffff',
+    //     stroke: '#000000',
+    //     strokeThickness: 8,
+    //     align: 'center',
+    //   })
+    //   .setOrigin(0.5);
 
     this.cameras.main.setBackgroundColor(isWin ? '#1dce1d' : '#e31c1c');
 

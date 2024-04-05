@@ -10,7 +10,7 @@ import {
   EBoosterType,
   GRID,
   HAS_MINIMAL_ONCE_GAME,
-  INITIAL_MOVES,
+  INITIAL_TURNS,
   INITIAL_RESETS,
   MIN_ADJACENTS,
   WIN_SCORE,
@@ -18,12 +18,13 @@ import {
 
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
-import { isAdjacentCells } from './utilities/matches';
+
 import UI, {
   boosterText,
   resetText,
-  moveText,
+  turnText,
   scoreText,
+  teleportBtn,
 } from '../objects/utilities/UI';
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';
@@ -36,7 +37,7 @@ export default class GameManager {
   currentBuster: EBoosterType | null = null;
   resets: number;
   score: number = 0;
-  moves: number = INITIAL_MOVES;
+  turns: number = INITIAL_TURNS;
   constructor() {
     gameManager = this;
     this.board = new Board();
@@ -49,7 +50,7 @@ export default class GameManager {
   }
 
   public async onSelectTile(tile: Tile) {
-    // TODO: nedd refacttoring
+    // TODO: need refactoring as state machine(?)
     const matches = this.board.getTileMatches(tile.cell);
 
     if (this.currentBuster === null) {
@@ -130,7 +131,6 @@ export default class GameManager {
     this.resets = this.resets - 1;
 
     if (this.resets > 0) {
-      resetText.setText(`Resets: ${this.resets}`);
       this.board.resetBoard();
     } else {
       this.makeGameOver();
@@ -152,11 +152,11 @@ export default class GameManager {
 
   private makeTurn(score: number) {
     this.score = this.score + score;
-    this.moves = this.moves - 1;
+    this.turns = this.turns - 1;
 
-    if (this.moves > 0 && this.score < WIN_SCORE) {
-      scoreText.setText(`Score: ${this.score}`);
-      moveText.setText(`Score: ${this.moves}`);
+    if (this.turns > 0 && this.score < WIN_SCORE) {
+      scoreText.setText(`${this.score}`);
+      turnText.setText(`${this.turns}`);
     } else {
       this.makeGameOver();
     }
@@ -166,7 +166,7 @@ export default class GameManager {
     gameScene.scene.stop('UI');
     gameScene.scene.start('GameOverScene', {
       score: this.score,
-      isWin: this.moves > 0 && this.resets > 0,
+      isWin: this.turns > 0 && this.resets > 0,
     });
   }
 }

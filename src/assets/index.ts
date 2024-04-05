@@ -5,6 +5,8 @@ export enum EAssetsImg {
   LOGO = 'LOGO',
   RESET = 'RESET',
   TELEPORT = 'TELEPORT',
+  TURNS = 'TURNS',
+  SCORE = 'SCORE',
 }
 
 export const ASSETS_IMG: {
@@ -17,6 +19,8 @@ export const ASSETS_IMG: {
     name: 'teleport_btn',
     url: 'assets/teleport_btn.png',
   },
+  [EAssetsImg.TURNS]: { name: 'turns_bg', url: 'assets/moves_bg.png' },
+  [EAssetsImg.SCORE]: { name: 'score_bg', url: 'assets/score_bg.png' },
 };
 
 export enum EAssetsSprites {
