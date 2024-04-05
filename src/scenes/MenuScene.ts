@@ -34,12 +34,11 @@ export default class MenuScene extends Scene {
     });
   }
   create() {
-    // this.scene.start('Game');
+    this.scene.start('Game');
   }
 
   showProgressBar() {
     const textureKey = 'progress_bar';
-    this.load.image(textureKey, 'assets/progress_bar.png');
 
     const { width: w, height: h } = this.textures.get(textureKey).get();
 
