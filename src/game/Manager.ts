@@ -6,12 +6,11 @@ import {
   makeScaleAnimation,
 } from '../objects/utilities/animation';
 import {
-  CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES,
   EBoosterType,
   GRID,
   HAS_MINIMAL_ONCE_GAME,
-  INITIAL_TURNS,
   INITIAL_RESETS,
+  INITIAL_TURNS,
   MIN_ADJACENTS,
   WIN_SCORE,
 } from '../config';
@@ -19,13 +18,7 @@ import {
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 
-import UI, {
-  boosterText,
-  resetText,
-  turnText,
-  scoreText,
-  teleportBtn,
-} from '../objects/utilities/UI';
+import UI, { scoreText, teleportBtn, turnText } from '../objects/utilities/UI';
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';
 
@@ -138,9 +131,13 @@ export default class GameManager {
   };
 
   public setBooster(booster: EBoosterType | null) {
-    boosterText.setText(
-      `Booster: ${booster === null ? 'none' : EBoosterType[booster]}`,
-    );
+    if (booster === EBoosterType.TELEPORT) {
+      // TODO: need refactoring
+      teleportBtn.setScale(0.6);
+    } else {
+      teleportBtn.setScale(0.5);
+    }
+
     this.currentBuster = booster;
   }
 

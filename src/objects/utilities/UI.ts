@@ -1,45 +1,30 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import { GameObjects, Scene } from 'phaser';
+import { GameObjects } from 'phaser';
 import { EAssetsImg } from '../../assets';
 import {
   EBoosterType,
   HALF_SCREEN,
   INITIAL_BOARD_SCREEN,
   INITIAL_TURNS,
-  INITIAL_RESETS,
 } from '../../config';
 import { gameManager } from '../../game/Manager';
 
 export let scoreText: GameObjects.Text,
   turnText: GameObjects.Text,
-  resetText: GameObjects.Text,
-  boosterText: GameObjects.Text;
+  resetText: GameObjects.Text;
+
 export let teleportBtn: GameObjects.Image;
 export let ui: Phaser.Scene;
 
 export default class UI extends Phaser.Scene {
-  teleport: GameObjects.Image;
-  public titleCurrentBuster: GameObjects.Text;
-
   constructor() {
     super('UI');
-
     ui = this;
   }
 
   preload() {}
 
   create() {
-    teleportBtn = this.add
-      .image(85, INITIAL_BOARD_SCREEN.HEIGHT + 360, EAssetsImg.TELEPORT)
-      .setDepth(1)
-      .setOrigin(0, 0)
-      .setScale(0.5);
-    teleportBtn.setInteractive({ useHandCursor: true });
-    teleportBtn.on('pointerup', () =>
-      gameManager.setBooster(EBoosterType.TELEPORT),
-    );
-
     const scoreBlockX = HALF_SCREEN.WIDTH + 300,
       scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 200;
 
@@ -72,10 +57,24 @@ export default class UI extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(2);
 
-    boosterText = this.add
-      .text(50, INITIAL_BOARD_SCREEN.HEIGHT - 150, 'Booster: none', {
-        font: 'bold 53px Geneva',
+    const teleportBlockX = 170,
+      teleportBlockY = INITIAL_BOARD_SCREEN.HEIGHT + 360;
+
+    this.add
+      .text(teleportBlockX, teleportBlockY, `Teleport`, {
+        font: '44px Geneva',
       })
-      .setDepth(1);
+      .setOrigin(0.5)
+      .setDepth(2);
+
+    teleportBtn = this.add
+      .image(teleportBlockX, teleportBlockY, EAssetsImg.BOOSTER)
+      .setDepth(1)
+      .setOrigin(0.5)
+      .setScale(0.5);
+    teleportBtn.setInteractive({ useHandCursor: true });
+    teleportBtn.on('pointerup', () =>
+      gameManager.setBooster(EBoosterType.TELEPORT),
+    );
   }
 }
