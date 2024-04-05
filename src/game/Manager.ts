@@ -136,7 +136,7 @@ export default class GameManager {
   }
 
   private makeGameOver() {
-    // gameScene.scene.remove('UI');
+    gameScene.scene.stop('UI');
     gameScene.scene.start('GameOverScene');
   }
 }
