@@ -1,52 +1,38 @@
-import { GameObjects } from 'phaser';
-// import { Game } from '../scenes/Game';
+import { gameScene } from '../scenes/GameScene';
+import { ETileType } from '../config';
+import { EAssetsSprites } from '../assets';
+import { tileToPosition } from '../game/utilities/position';
+import { gameManager } from '../game/Manager';
+import Board, { board } from '../game/Board';
 
-export default class Tile extends GameObjects.Sprite {
-  // row;
-  // col;
-  constructor(
-    scene: Phaser.Scene,
-    x: number,
-    y: number,
-    data: {
-      asset: string | Phaser.Textures.Texture;
-      row?: number;
-      col?: number;
-    },
-  ) {
-    // super(scene, x, y, data.asset);
-    super(scene, x, y, data.asset);
-    // this.data = data;
-    // this.row = data.row;
-    // this.col = data.col;
+export default class Tile extends Phaser.GameObjects.Sprite {
+  public cell: IPositionInCell;
+  public position: IPositionInPixel;
+  public tileType: ETileType;
+  private board: Board;
+
+  constructor(tileType: ETileType, tilePos: IPositionInCell) {
+    const { x, y } = tileToPosition(tilePos);
+
+    super(gameScene, x, y, EAssetsSprites.TILES, tileType);
+    gameScene.add.existing(this).setDepth(10).setOrigin(0.5, 0.5);
+
+    this.position = { x, y };
+    this.cell = tilePos;
+    this.tileType = tileType;
+    this.board = board;
 
     this.setInteractive();
-    //
-    this.on(
-      'pointerdown',
-      () => {
-        // this.scene.pickBlock(this);
-        console.log('pointerdown', data.row, data.col);
-      },
-      this,
-    );
+    this.on('pointerdown', () => this.onPointerDown());
   }
 
-  // reset(x, y, data) {
-  //   this.setPosition(x, y);
-  //   this.setTexture(data.asset);
-  //   this.row = data.row;
-  //   this.col = data.col;
-  // }
+  onPointerDown() {
+    gameManager.onSelectTile(this);
+  }
 
-  // deactivate() {
-  //   this.setTexture('deadBlock');
-  //   this.col = null;
-  //   this.row = null;
-  //
-  //   this.scene.time.delayedCall(this.scene.ANIMATION_TIME / 2, () => {
-  //     this.setActive(false);
-  //     this.setVisible(false);
-  //   });
-  // }
+  public updatePositionAndTile = (tile: IPositionInCell) => {
+    this.cell = tile;
+    this.position = tileToPosition(tile);
+    this.board.setTile(this, tile);
+  };
 }

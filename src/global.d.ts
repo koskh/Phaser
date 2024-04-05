@@ -1,7 +1,13 @@
-interface IGameState {
-  board: IGameBoard | null;
-  count: number;
-  attempts: number;
+interface IPositionInPixel {
+  x: number;
+  y: number;
 }
 
-interface IGameBoard extends Array<Array<number>> {}
+interface IPositionInCell {
+  tileX: number;
+  tileY: number;
+}
+
+interface IGraph {
+  [key: string]: IGraph;
+}
