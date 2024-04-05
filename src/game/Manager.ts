@@ -6,9 +6,10 @@ import {
   makeScaleAnimation,
 } from '../objects/utilities/animation';
 import {
-  CAN_SWAP_TWO_ADJACENT_TILES,
+  CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES,
   EBoosterType,
   GRID,
+  HAS_MINIMAL_ONCE_GAME,
   INITIAL_RESETS,
   MIN_ADJACENTS,
 } from '../config';
@@ -31,9 +32,10 @@ export default class GameManager {
     this.board = new Board();
     this.resets = INITIAL_RESETS;
 
-    while (!this.board.isPlayable()) {
+    while (HAS_MINIMAL_ONCE_GAME && !this.board.isPlayable()) {
       // we want gamer has minimal once game
-      this.board = new Board();
+      this.board.resetBoard();
+      // this.board = new Board();
     }
   }
 
@@ -43,35 +45,37 @@ export default class GameManager {
     //default
     if (this.currentBuster === null) {
       if (matches.length >= MIN_ADJACENTS) {
-        this.setPrevSelect(null);
-
         await this.destroyTiles(matches);
         await this.fallDownTails();
+        this.setPrevSelect(null);
       } else {
         if (this.prevSelectedTile === null) {
           this.setPrevSelect(tile);
         } else {
           //swap adjacement tiles
-          CAN_SWAP_TWO_ADJACENT_TILES &&
+          CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES &&
             isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
             (await this.swapTwoTiles(this.prevSelectedTile, tile));
           this.setPrevSelect(null);
         }
       }
     } else if (this.currentBuster === EBoosterType.TELEPORT) {
-      if (this.currentBuster === EBoosterType.TELEPORT) {
-        if (this.prevSelectedTile === null) {
-          this.prevSelectedTile = tile;
-        } else {
-          //swap tiles
-          await this.swapTwoTiles(this.prevSelectedTile, tile);
-          this.setPrevSelect(null);
-          this.setBooster(null);
-        }
+      if (this.prevSelectedTile === null) {
+        this.setPrevSelect(tile);
+      } else {
+        //swap tiles
+        await this.swapTwoTiles(this.prevSelectedTile, tile);
+        this.setPrevSelect(null);
+        this.setBooster(null);
       }
     }
 
-    console.log('board has MATCHES', this.board.isPlayable());
+    // console.log('board is playable', this.board.isPlayable());
+
+    if (!this.board.isPlayable()) {
+      await new Promise((r) => setTimeout(r, 1000)); // for visual pause after update board
+      await this.reset();
+    }
   }
 
   private destroyTiles = async (
@@ -107,6 +111,7 @@ export default class GameManager {
   };
 
   public reset = async () => {
+    //TODO: need visual present for  start reset board action
     const allTiles = this.board.getCurrentMap();
     await makeScaleAnimation(allTiles.flat() as Tile[]);
 
@@ -114,12 +119,10 @@ export default class GameManager {
 
     if (this.resets > 0) {
       resetText.setText(`Resets: ${this.resets}`);
-      this.board = new Board();
+      this.board.resetBoard();
     } else {
       this.makeGameOver();
     }
-
-    console.log('board has MATCHES', this.board.isPlayable());
   };
 
   public setBooster(booster: EBoosterType | null) {

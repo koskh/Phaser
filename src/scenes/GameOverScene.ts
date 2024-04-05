@@ -11,7 +11,7 @@ export default class GameOverScene extends Scene {
     this.add
       .text(this.sys.canvas.width / 2, 460, 'Game over', {
         fontFamily: 'Arial Black',
-        fontSize: 54,
+        fontSize: 64,
         color: '#ffffff',
         stroke: '#000000',
         strokeThickness: 8,
@@ -22,7 +22,7 @@ export default class GameOverScene extends Scene {
     this.add
       .text(this.sys.canvas.width / 2, 520, 'Click here to restart', {
         fontFamily: 'Arial Black',
-        fontSize: 38,
+        fontSize: 42,
         color: '#ffffff',
         stroke: '#000000',
         strokeThickness: 8,

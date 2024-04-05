@@ -39,5 +39,6 @@ export enum EBoosterType {
   SUPER = 'SUPER',
 }
 
-export const CAN_SWAP_TWO_ADJACENT_TILES = false;
+export const CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES = false;
+export const HAS_MINIMAL_ONCE_GAME = true;
 export const INITIAL_RESETS = 3;

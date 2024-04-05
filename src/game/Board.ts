@@ -25,9 +25,13 @@ export default class Board {
   create() {
     // const tilesGrid: IGameGrid = getTestTilesGrid();
     const tilesGrid: IGameGrid = getNewTilesGrid(GRID.ROWS, GRID.COLUMNS);
-
     const board: IGameBoard = getNewBoard(tilesGrid);
     this.current = board;
+  }
+
+  public resetBoard() {
+    this.clearBoard();
+    this.create();
   }
 
   public getCurrentMap() {
@@ -57,5 +61,9 @@ export default class Board {
   public isPlayable(): boolean {
     const grid = this.getCurrentGrid();
     return hasMatches(grid);
+  }
+
+  private clearBoard() {
+    this.current.flat().map((tile) => tile && tile.destroy());
   }
 }
