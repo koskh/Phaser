@@ -16,7 +16,7 @@ export const HALF_SCREEN = {
 
 export const INITIAL_BOARD_SCREEN = {
   WIDTH: HALF_SCREEN.WIDTH / 2,
-  HEIGHT: HALF_SCREEN.HEIGHT / 2 - 100,
+  HEIGHT: HALF_SCREEN.HEIGHT / 2,
 };
 
 export enum ETileType {
