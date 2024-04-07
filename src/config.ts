@@ -43,8 +43,8 @@ export const MIN_ADJACENTS = 2;
 
 export const CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES = false;
 export const HAS_MINIMAL_ONCE_GAME = true;
-export const INITIAL_RESETS = 5;
+export const INITIAL_RESETS = 3;
 export const WIN_SCORE = 80;
-export const INITIAL_TURNS = 3;
+export const INITIAL_TURNS = 5;
 export const SCORE_FOR_TILE = 1;
 export const INITIAL_BOOSTER_BOMB_RADIUS = 3;
