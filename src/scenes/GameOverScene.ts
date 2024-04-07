@@ -32,19 +32,14 @@ export default class GameOverScene extends Scene {
         .setColor(isWin ? winColor : loseColor);
 
     this.add
-      .text(
-        this.sys.canvas.width / 2,
-        460,
-        `You are ${isWin ? 'win' : ' lose'}`,
-        {
-          fontFamily: 'Arial Black',
-          fontSize: 72,
-          color: '#ffffff',
-          stroke: '#000000',
-          strokeThickness: 8,
-          align: 'center',
-        },
-      )
+      .text(this.sys.canvas.width / 2, 460, `You  ${isWin ? 'win' : ' lose'}`, {
+        fontFamily: 'Arial Black',
+        fontSize: 72,
+        color: '#ffffff',
+        stroke: '#000000',
+        strokeThickness: 8,
+        align: 'center',
+      })
       .setOrigin(0.5)
       .setColor(isWin ? winColor : loseColor);
 
