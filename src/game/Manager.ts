@@ -72,13 +72,13 @@ export default class GameManager {
 
       default:
         // eslint-disable-next-line no-case-declarations
-        const matchesAdacents = this.board.getTileMatches(tile.cell);
-        if (matchesAdacents.length >= MIN_ADJACENTS) {
-          await this.destroyTiles(matchesAdacents);
+        const matchesAdjacents = this.board.getTileMatches(tile.cell);
+        if (matchesAdjacents.length >= MIN_ADJACENTS) {
+          await this.destroyTiles(matchesAdjacents);
           await this.fallDownTails();
           this.setPrevSelect(null);
 
-          this.makeTurn(getScore(matchesAdacents.length));
+          this.makeTurn(getScore(matchesAdjacents.length));
         }
     }
 
