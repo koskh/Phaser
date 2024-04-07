@@ -27,7 +27,7 @@ export default class UI extends Phaser.Scene {
 
   create() {
     const progressBlockX = HALF_SCREEN.WIDTH,
-      progressBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 375;
+      progressBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 325;
 
     this.add
       .image(progressBlockX, progressBlockY, EAssetsImg.PROGRESS_BG)
@@ -42,8 +42,8 @@ export default class UI extends Phaser.Scene {
       .setScale(DEFAULT_SCALE)
       .setCrop(0);
 
-    const scoreBlockX = HALF_SCREEN.WIDTH + 500,
-      scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 340;
+    const scoreBlockX = HALF_SCREEN.WIDTH + 515,
+      scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 290;
 
     this.add
       .image(scoreBlockX, scoreBlockY, EAssetsImg.SCORE)

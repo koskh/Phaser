@@ -16,7 +16,7 @@ export const HALF_SCREEN = {
 
 export const INITIAL_BOARD_SCREEN = {
   WIDTH: HALF_SCREEN.WIDTH / 2,
-  HEIGHT: HALF_SCREEN.HEIGHT / 2,
+  HEIGHT: HALF_SCREEN.HEIGHT / 2 - 50,
 };
 
 export enum ETileType {
@@ -47,3 +47,4 @@ export const INITIAL_RESETS = 5;
 export const WIN_SCORE = 80;
 export const INITIAL_TURNS = 3;
 export const SCORE_FOR_TILE = 1;
+export const INITIAL_BOOSTER_BOMB_RADIUS = 3;
