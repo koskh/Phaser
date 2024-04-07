@@ -49,37 +49,26 @@ export default class GameManager {
   }
 
   public async onSelectTile(tile: Tile) {
-    // TODO: need refactoring as state machine(?)
     const matches = this.board.getTileMatches(tile.cell);
 
-    if (this.currentBuster === null) {
-      if (matches.length >= MIN_ADJACENTS) {
-        await this.destroyTiles(matches);
-        await this.fallDownTails();
-        this.setPrevSelect(null);
+    switch (this.currentBuster) {
+      case EBoosterType.TELEPORT:
+        if (this.prevSelectedTile === null) {
+          this.setPrevSelect(tile);
+        } else {
+          await this.swapTwoTiles(this.prevSelectedTile, tile);
+          this.setPrevSelect(null);
+          this.setBooster(null);
+        }
+        break;
+      default:
+        if (matches.length >= MIN_ADJACENTS) {
+          await this.destroyTiles(matches);
+          await this.fallDownTails();
+          this.setPrevSelect(null);
 
-        this.makeTurn(getScore(matches.length));
-      }
-      // else {
-      //   if (this.prevSelectedTile === null) {
-      //     this.setPrevSelect(tile);
-      //   } else {
-      //     //swap adjacement tiles
-      //     CAN_SIMPLE_SWAP_TWO_ADJACENT_TILES &&
-      //       isAdjacentCells(this.prevSelectedTile.cell, tile.cell) &&
-      //       (await this.swapTwoTiles(this.prevSelectedTile, tile));
-      //     this.setPrevSelect(null);
-      //   }
-      // }
-    } else if (this.currentBuster === EBoosterType.TELEPORT) {
-      if (this.prevSelectedTile === null) {
-        this.setPrevSelect(tile);
-      } else {
-        //swap tiles
-        await this.swapTwoTiles(this.prevSelectedTile, tile);
-        this.setPrevSelect(null);
-        this.setBooster(null);
-      }
+          this.makeTurn(getScore(matches.length));
+        }
     }
 
     if (!this.board.isPlayable()) {
