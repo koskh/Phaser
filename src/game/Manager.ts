@@ -20,10 +20,11 @@ import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 
 import UI, {
+  bombBtn,
+  progressBarImg,
   scoreText,
   teleportBtn,
   turnText,
-  progressBarImg,
 } from '../objects/UI';
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';
@@ -49,8 +50,6 @@ export default class GameManager {
   }
 
   public async onSelectTile(tile: Tile) {
-    const matches = this.board.getTileMatches(tile.cell);
-
     switch (this.currentBuster) {
       case EBoosterType.TELEPORT:
         if (this.prevSelectedTile === null) {
@@ -61,13 +60,25 @@ export default class GameManager {
           this.setBooster(null);
         }
         break;
+      case EBoosterType.BOMB:
+        // eslint-disable-next-line no-case-declarations
+        const matchesRadius = this.board.getRadiusMatches(tile.cell);
+        await this.destroyTiles(matchesRadius);
+        await this.fallDownTails();
+        this.setPrevSelect(null);
+        this.setBooster(null);
+        this.makeTurn(getScore(matchesRadius.length));
+        break;
+
       default:
-        if (matches.length >= MIN_ADJACENTS) {
-          await this.destroyTiles(matches);
+        // eslint-disable-next-line no-case-declarations
+        const matchesAdacents = this.board.getTileMatches(tile.cell);
+        if (matchesAdacents.length >= MIN_ADJACENTS) {
+          await this.destroyTiles(matchesAdacents);
           await this.fallDownTails();
           this.setPrevSelect(null);
 
-          this.makeTurn(getScore(matches.length));
+          this.makeTurn(getScore(matchesAdacents.length));
         }
     }
 
@@ -126,13 +137,17 @@ export default class GameManager {
   };
 
   public setBooster(booster: EBoosterType | null) {
-    if (booster === EBoosterType.TELEPORT) {
-      // TODO: need refactoring
-      teleportBtn.setScale(DEFAULT_SCALE + 0.1);
-    } else {
-      teleportBtn.setScale(DEFAULT_SCALE);
+    switch (booster) {
+      case EBoosterType.TELEPORT:
+        teleportBtn.setScale(DEFAULT_SCALE + 0.1);
+        break;
+      case EBoosterType.BOMB:
+        bombBtn.setScale(DEFAULT_SCALE + 0.1);
+        break;
+      default:
+        teleportBtn.setScale(DEFAULT_SCALE);
+        bombBtn.setScale(DEFAULT_SCALE);
     }
-
     this.currentBuster = booster;
   }
 

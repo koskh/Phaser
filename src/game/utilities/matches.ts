@@ -1,4 +1,4 @@
-import { ETileType, GRID } from '../../config';
+import { ETileType, GRID, INITIAL_BOOSTER_BOMB_RADIUS } from '../../config';
 import { IGameBoard, IGameGrid } from '../Board';
 import { getNewTileType } from './board';
 
@@ -7,6 +7,12 @@ const LEFT_VECTOR = [-1, 0];
 const UP_VECTOR = [0, 1];
 const DOWN_VECTOR = [0, -1];
 const VECTORS = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
+// const PERPENDICULAR_VECTORS = [
+//   [RIGHT_VECTOR, DOWN_VECTOR],
+//   [DOWN_VECTOR, LEFT_VECTOR],
+//   [LEFT_VECTOR, UP_VECTOR],
+//   [UP_VECTOR, RIGHT_VECTOR],
+// ];
 
 const { ROWS, COLUMNS } = GRID;
 
@@ -20,6 +26,41 @@ export function hasMatches(grid: IGameGrid): boolean {
   }
 
   return hasMatches;
+}
+
+export function getRadiusMatches(
+  position: IPositionInCell,
+  board: IGameBoard,
+  radius: number = INITIAL_BOOSTER_BOMB_RADIUS,
+): IPositionInCell[] {
+  // R^2 = x^2 + y^2;
+  const { tileX, tileY } = position;
+
+  // TODO: need refactoring, dev-only,
+  // TODO: need tests
+  const strippedBoard = board.flat().filter((t) => t !== null);
+  const squareWithSelectCenter: IPositionInCell[] = strippedBoard
+    .filter(
+      (t) =>
+        t &&
+        t.cell.tileX >= tileX - radius &&
+        t.cell.tileX <= tileX + radius &&
+        t.cell.tileY >= tileY - radius &&
+        t.cell.tileY <= tileY + radius,
+    )
+    .map((t) => {
+      // @ts-expect-error dev-only
+      return { ...t.cell };
+    });
+
+  const adjCells: IPositionInCell[] = squareWithSelectCenter.filter((p) => {
+    return (
+      Math.pow(tileX - p.tileX, 2) + Math.pow(tileY - p.tileY, 2) <=
+      Math.pow(radius + 0.5, 2) // Math.pow(radius, 2)// TODO: need collaborate with QA
+    );
+  });
+
+  return adjCells;
 }
 
 export function findMatches(

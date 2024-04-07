@@ -6,7 +6,7 @@ import {
   getTestTilesGrid,
   getTilesGrid,
 } from './utilities/board';
-import { findMatches, hasMatches } from './utilities/matches';
+import { findMatches, getRadiusMatches, hasMatches } from './utilities/matches';
 import { ETileType, GRID, VARIATIONS } from '../config';
 
 export interface IGameGrid extends Array<Array<ETileType | null>> {}
@@ -48,6 +48,10 @@ export default class Board {
 
   public getTileMatches(position: IPositionInCell) {
     return findMatches(position, this.getCurrentGrid());
+  }
+
+  public getRadiusMatches(position: IPositionInCell) {
+    return getRadiusMatches(position, this.getCurrentMap());
   }
 
   public getTile(positionInTile: IPositionInCell): Tile | null {
