@@ -56,7 +56,7 @@ export function getRadiusMatches(
   const adjCells: IPositionInCell[] = squareWithSelectCenter.filter((p) => {
     return (
       Math.pow(tileX - p.tileX, 2) + Math.pow(tileY - p.tileY, 2) <=
-      Math.pow(radius + 0.5, 2) // Math.pow(radius, 2)// TODO: need collaborate with QA
+      Math.pow(radius, 2) // Math.pow(radius + 0.5, 2)// TODO: need collaborate with QA
     );
   });
 
