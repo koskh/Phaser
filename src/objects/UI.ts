@@ -12,7 +12,7 @@ import { gameManager } from '../game/Manager';
 
 export let scoreText: GameObjects.Text,
   turnText: GameObjects.Text,
-  resetText: GameObjects.Text;
+  progressBarImg: GameObjects.Image;
 
 export let teleportBtn: GameObjects.Image;
 export let ui: Phaser.Scene;
@@ -34,11 +34,13 @@ export default class UI extends Phaser.Scene {
       .setDepth(1)
       .setOrigin(0.5)
       .setScale(DEFAULT_SCALE);
-    this.add
+
+    progressBarImg = this.add
       .image(progressBlockX, progressBlockY + 35, EAssetsImg.PROGRESS_BAR)
       .setDepth(2)
       .setOrigin(0.5)
-      .setScale(DEFAULT_SCALE);
+      .setScale(DEFAULT_SCALE)
+      .setCrop(0);
 
     const scoreBlockX = HALF_SCREEN.WIDTH + 500,
       scoreBlockY = INITIAL_BOARD_SCREEN.HEIGHT - 340;
