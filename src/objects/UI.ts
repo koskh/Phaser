@@ -103,18 +103,18 @@ export default class UI extends Phaser.Scene {
       gameManager.setBooster(EBoosterType.TELEPORT),
     );
 
-      this.add
-        .text(teleportBlockX, teleportBlockY + 300, `Bomb`, {
-          font: '44px Geneva',
-        })
-        .setOrigin(0.5)
-        .setDepth(2);
-      bombBtn = this.add
-        .image(teleportBlockX, teleportBlockY + 300, EAssetsImg.BOOSTER)
-        .setDepth(1)
-        .setOrigin(0.5)
-        .setScale(DEFAULT_SCALE);
-      bombBtn.setInteractive({ useHandCursor: true });
-      bombBtn.on('pointerup', () => gameManager.setBooster(EBoosterType.BOMB));
+    this.add
+      .text(teleportBlockX, teleportBlockY + 300, `Bomb`, {
+        font: '44px Geneva',
+      })
+      .setOrigin(0.5)
+      .setDepth(2);
+    bombBtn = this.add
+      .image(teleportBlockX, teleportBlockY + 300, EAssetsImg.BOOSTER)
+      .setDepth(1)
+      .setOrigin(0.5)
+      .setScale(DEFAULT_SCALE);
+    bombBtn.setInteractive({ useHandCursor: true });
+    bombBtn.on('pointerup', () => gameManager.setBooster(EBoosterType.BOMB));
   }
 }
