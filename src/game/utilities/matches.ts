@@ -14,14 +14,11 @@ const VECTORS = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
 // ];
 
 export function hasMatches(grid: IGameGrid, initialGrid = GRID): boolean {
+  const { ROWS: maxRows, COLUMNS: maxColumns } = initialGrid;
   let hasMatches = false;
 
-  for (let row = 0; row < initialGrid.ROWS && !hasMatches; row++) {
-    for (
-      let column = 0;
-      column < initialGrid.COLUMNS && !hasMatches;
-      column++
-    ) {
+  for (let row = 0; row < maxRows && !hasMatches; row++) {
+    for (let column = 0; column < maxColumns && !hasMatches; column++) {
       hasMatches = findMatches({ tileX: column, tileY: row }, grid).length > 1;
     }
   }
