@@ -5,7 +5,7 @@ import { IGameBoard, IGameGrid } from '../Board';
 export function getTestTilesGrid(): IGameGrid {
   const grid = getNewTilesGrid(GRID.ROWS, GRID.COLUMNS);
   const testPartGrid = [
-    [ETileType.RED, ETileType.GREEN, ETileType.GREEN],
+    [ETileType.RED, ETileType.GREEN, ETileType.RED],
     [ETileType.PURPLE, ETileType.PURPLE, ETileType.YELLOW],
     [ETileType.PURPLE, ETileType.PURPLE, ETileType.GREEN],
     [ETileType.YELLOW, ETileType.BLUE, ETileType.RED],
