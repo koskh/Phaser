@@ -35,13 +35,12 @@ export default class GameManager {
   ui: UI;
   prevSelectedTile: Tile | null = null;
   currentBuster: EBoosterType | null = null;
-  resets: number;
+  resets: number = INITIAL_RESETS;
   score: number = 0;
   turns: number = INITIAL_TURNS;
   constructor() {
     gameManager = this;
     this.board = new Board();
-    this.resets = INITIAL_RESETS;
 
     while (HAS_MINIMAL_ONCE_GAME && !this.board.isPlayable()) {
       // we want gamer has minimal once game

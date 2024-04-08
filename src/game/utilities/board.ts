@@ -63,7 +63,7 @@ export function getTilesGrid(board: IGameBoard): IGameGrid {
   return grid;
 }
 
-export function getNewTileType(): ETileType {
-  const variation = Phaser.Math.Between(0, VARIATIONS - 1);
+export function getNewTileType(variations = VARIATIONS): ETileType {
+  const variation = Phaser.Math.Between(0, variations - 1);
   return variation as ETileType;
 }

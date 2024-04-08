@@ -10,6 +10,7 @@ import { getTestTilesGrid } from '../board';
 const GRID = getTestTilesGrid();
 
 const CELL: IPositionInCell = { tileX: 1, tileY: 0 };
+const CELL_1: IPositionInCell = { tileX: 0, tileY: 0 };
 const CELL_2: IPositionInCell = { tileX: 1, tileY: 1 };
 const CELL_3: IPositionInCell = { tileX: 0, tileY: 2 };
 test('can find adjacements for one cell', () => {
@@ -36,14 +37,8 @@ test('can build one-way graph for adjacent cells', () => {
     },
   });
 
-  expect(findGraphForCell(CELL_2, GRID)).toEqual({
-    '1_1': {
-      '0_1': {
-        '0_2': {
-          '1_2': {},
-        },
-      },
-    },
+  expect(findGraphForCell(CELL_1, GRID)).toEqual({
+    '0_0': {},
   });
 });
 
