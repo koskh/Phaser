@@ -1,6 +1,5 @@
-import { ETileType, GRID, INITIAL_BOOSTER_BOMB_RADIUS } from '../../config';
+import { GRID, INITIAL_BOOSTER_BOMB_RADIUS } from '../../config';
 import { IGameBoard, IGameGrid } from '../Board';
-import { getNewTileType } from './board';
 
 const RIGHT_VECTOR = [1, 0];
 const LEFT_VECTOR = [-1, 0];
@@ -30,35 +29,37 @@ export function hasMatches(grid: IGameGrid): boolean {
 
 export function getRadiusMatches(
   position: IPositionInCell,
-  board: IGameBoard,
   radius: number = INITIAL_BOOSTER_BOMB_RADIUS,
+  grid = GRID,
 ): IPositionInCell[] {
   // R^2 = x^2 + y^2;
+  const { ROWS: rows, COLUMNS: columns } = grid;
   const { tileX, tileY } = position;
 
-  // TODO: need refactoring, dev-only,
-  // TODO: need tests
-  const strippedBoard = board.flat().filter((t) => t !== null);
-  const squareWithSelectCenter: IPositionInCell[] = strippedBoard
-    .filter(
-      (t) =>
-        t &&
-        t.cell.tileX >= tileX - radius &&
-        t.cell.tileX <= tileX + radius &&
-        t.cell.tileY >= tileY - radius &&
-        t.cell.tileY <= tileY + radius,
-    )
-    .map((t) => {
-      // @ts-expect-error dev-only
-      return { ...t.cell };
-    });
+  const squareCellsWithSelectCenter: IPositionInCell[] = [];
+  for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      if (
+        column >= tileX - radius &&
+        column <= tileX + radius &&
+        row >= tileY - radius &&
+        row <= tileY + radius
+      )
+        squareCellsWithSelectCenter.push({
+          tileX: row,
+          tileY: column,
+        });
+    }
+  }
 
-  const adjCells: IPositionInCell[] = squareWithSelectCenter.filter((p) => {
-    return (
-      Math.pow(tileX - p.tileX, 2) + Math.pow(tileY - p.tileY, 2) <=
-      Math.pow(radius, 2) // Math.pow(radius + 0.5, 2)// TODO: need collaborate with QA
-    );
-  });
+  const adjCells: IPositionInCell[] = squareCellsWithSelectCenter.filter(
+    (p) => {
+      return (
+        Math.pow(tileX - p.tileX, 2) + Math.pow(tileY - p.tileY, 2) <=
+        Math.pow(radius, 2) // Math.pow(radius + 0.5, 2)// TODO: need collaborate with QA
+      );
+    },
+  );
 
   return adjCells;
 }

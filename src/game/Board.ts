@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import Tile from '../objects/Tile';
-import {
-  getNewTilesGrid,
-  getNewBoard,
-  getTestTilesGrid,
-  getTilesGrid,
-} from './utilities/board';
+import { getNewTilesGrid, getNewBoard, getTilesGrid } from './utilities/board';
 import { findMatches, getRadiusMatches, hasMatches } from './utilities/matches';
-import { ETileType, GRID, VARIATIONS } from '../config';
+import { ETileType, GRID } from '../config';
 
 export interface IGameGrid extends Array<Array<ETileType | null>> {}
 
@@ -51,7 +46,7 @@ export default class Board {
   }
 
   public getRadiusMatches(position: IPositionInCell) {
-    return getRadiusMatches(position, this.getCurrentMap());
+    return getRadiusMatches(position);
   }
 
   public getTile(positionInTile: IPositionInCell): Tile | null {
