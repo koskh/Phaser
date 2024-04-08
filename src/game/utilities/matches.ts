@@ -13,13 +13,15 @@ const VECTORS = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
 //   [UP_VECTOR, RIGHT_VECTOR],
 // ];
 
-const { ROWS, COLUMNS } = GRID;
-
-export function hasMatches(grid: IGameGrid): boolean {
+export function hasMatches(grid: IGameGrid, initialGrid = GRID): boolean {
   let hasMatches = false;
 
-  for (let row = 0; row < GRID.ROWS && !hasMatches; row++) {
-    for (let column = 0; column < GRID.COLUMNS && !hasMatches; column++) {
+  for (let row = 0; row < initialGrid.ROWS && !hasMatches; row++) {
+    for (
+      let column = 0;
+      column < initialGrid.COLUMNS && !hasMatches;
+      column++
+    ) {
       hasMatches = findMatches({ tileX: column, tileY: row }, grid).length > 1;
     }
   }
@@ -115,8 +117,8 @@ export function findGraphForCell(
   return r;
 }
 
-function isCellInGrid(tileX: number, tileY: number): boolean {
-  return tileX >= 0 && tileX < COLUMNS && tileY >= 0 && tileY < ROWS;
+function isCellInGrid(tileX: number, tileY: number, grid = GRID): boolean {
+  return tileX >= 0 && tileX < grid.COLUMNS && tileY >= 0 && tileY < grid.ROWS;
 }
 
 export function findAdjacentCells(
