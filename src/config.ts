@@ -47,4 +47,4 @@ export const INITIAL_RESETS = 3;
 export const WIN_SCORE = 80;
 export const INITIAL_TURNS = 5;
 export const SCORE_FOR_TILE = 1;
-export const INITIAL_BOOSTER_BOMB_RADIUS = 3;
+export const INITIAL_BOOSTER_BOMB_RADIUS = 2;

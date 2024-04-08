@@ -2,6 +2,7 @@ import {
   findAdjacentCells,
   findGraphForCell,
   getAllGraphPosition,
+  getRadiusMatches,
 } from '../matches';
 
 import { getTestTilesGrid } from '../board';
@@ -59,5 +60,53 @@ test('can get grid positions from graph', () => {
     { tileX: 0, tileY: 1 },
     { tileX: 0, tileY: 2 },
     { tileX: 1, tileY: 2 },
+  ]);
+});
+
+test('can get radius cells from selected', () => {
+  expect(getRadiusMatches(CELL, 1)).toEqual([
+    {
+      tileX: 0,
+      tileY: 0,
+    },
+    {
+      tileX: 1,
+      tileY: 0,
+    },
+    {
+      tileX: 1,
+      tileY: 1,
+    },
+  ]);
+
+  expect(getRadiusMatches(CELL, 2)).toEqual([
+    {
+      tileX: 0,
+      tileY: 0,
+    },
+    {
+      tileX: 0,
+      tileY: 1,
+    },
+    {
+      tileX: 1,
+      tileY: 0,
+    },
+    {
+      tileX: 1,
+      tileY: 1,
+    },
+    {
+      tileX: 1,
+      tileY: 2,
+    },
+    {
+      tileX: 2,
+      tileY: 0,
+    },
+    {
+      tileX: 2,
+      tileY: 1,
+    },
   ]);
 });
