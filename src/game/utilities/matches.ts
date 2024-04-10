@@ -45,14 +45,16 @@ export function getRadiusMatches(
         row <= tileY + radius
       )
         squareCellsWithSelectCenter.push({
-          tileX: row,
-          tileY: column,
+          tileX: column,
+          tileY: row,
         });
     }
   }
 
   const adjCells: IPositionInCell[] = squareCellsWithSelectCenter.filter(
     (p) => {
+      // debugger;
+
       return (
         Math.pow(tileX - p.tileX, 2) + Math.pow(tileY - p.tileY, 2) <=
         Math.pow(radius, 2) // Math.pow(radius + 0.5, 2)// TODO: need collaborate with QA

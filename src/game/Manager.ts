@@ -56,9 +56,9 @@ export default class GameManager {
         const matchesRadius = this.board.getRadiusMatches(tile.cell);
         await this.destroyTiles(matchesRadius);
         await this.fallDownTails();
+        this.makeTurn(getScore(matchesRadius.length));
         this.setPrevSelect(null);
         this.setBooster(null);
-        this.makeTurn(getScore(matchesRadius.length));
         break;
 
       default:

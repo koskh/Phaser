@@ -61,6 +61,10 @@ test('can get radius cells from selected', () => {
       tileY: 0,
     },
     {
+      tileX: 2,
+      tileY: 0,
+    },
+    {
       tileX: 1,
       tileY: 1,
     },
@@ -72,28 +76,32 @@ test('can get radius cells from selected', () => {
       tileY: 0,
     },
     {
+      tileX: 1,
+      tileY: 0,
+    },
+    {
+      tileX: 2,
+      tileY: 0,
+    },
+    {
+      tileX: 3,
+      tileY: 0,
+    },
+    {
       tileX: 0,
       tileY: 1,
     },
     {
       tileX: 1,
-      tileY: 0,
+      tileY: 1,
     },
     {
-      tileX: 1,
+      tileX: 2,
       tileY: 1,
     },
     {
       tileX: 1,
       tileY: 2,
-    },
-    {
-      tileX: 2,
-      tileY: 0,
-    },
-    {
-      tileX: 2,
-      tileY: 1,
     },
   ]);
 });
