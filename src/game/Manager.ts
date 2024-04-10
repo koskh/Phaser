@@ -19,15 +19,11 @@ import {
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 
-import UI, {
-  bombBtn,
-  progressBarImg,
-  scoreText,
-  teleportBtn,
-  turnText,
-} from '../objects/UI';
+import UI, { bombBtn, teleportBtn } from '../objects/UI';
+
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';
+import { EApplicationEvents, emitEvent } from '../eventsCenter';
 
 export let gameManager: GameManager;
 export default class GameManager {
@@ -160,11 +156,9 @@ export default class GameManager {
     this.score = this.score + score;
     this.turns = this.turns - 1;
 
-    this.setProgressBar(this.score / WIN_SCORE);
-
     if (this.turns > 0 && this.score < WIN_SCORE) {
-      scoreText.setText(`${this.score}`);
-      turnText.setText(`${this.turns}`);
+      emitEvent(EApplicationEvents.UPDATE_SCORE, this.score);
+      emitEvent(EApplicationEvents.UPDATE_TURNS, `${this.turns}`);
     } else {
       this.makeGameOver();
     }
@@ -177,10 +171,5 @@ export default class GameManager {
       turns: INITIAL_TURNS - this.turns,
       isWin: this.turns > 0 && this.resets > 0,
     });
-  }
-
-  private setProgressBar(arg0: number) {
-    const { width: w, height: h } = progressBarImg.texture.get();
-    progressBarImg.setCrop(0, 0, Math.ceil(arg0 * w), h);
   }
 }

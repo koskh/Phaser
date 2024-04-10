@@ -7,8 +7,10 @@ import {
   HALF_SCREEN,
   INITIAL_BOARD_SCREEN,
   INITIAL_TURNS,
+  WIN_SCORE,
 } from '../config';
 import { gameManager } from '../game/Manager';
+import { EApplicationEvents, onEvent } from '../eventsCenter';
 
 export let scoreText: GameObjects.Text,
   turnText: GameObjects.Text,
@@ -116,5 +118,21 @@ export default class UI extends Phaser.Scene {
       .setScale(DEFAULT_SCALE);
     bombBtn.setInteractive({ useHandCursor: true });
     bombBtn.on('pointerup', () => gameManager.setBooster(EBoosterType.BOMB));
+
+    onEvent(EApplicationEvents.UPDATE_SCORE, (newScore: number) => {
+      scoreText.setText(`${newScore}`);
+      this.setProgressBar(newScore / WIN_SCORE);
+    });
+    onEvent(EApplicationEvents.UPDATE_TURNS, (newTurns: string) => {
+      turnText.setText(newTurns);
+    });
+    onEvent(EApplicationEvents.UPDATE_TURNS, (newTurns: string) => {
+      turnText.setText(newTurns);
+    });
+  }
+
+  private setProgressBar(arg0: number) {
+    const {width: w, height: h} = progressBarImg.texture.get();
+    progressBarImg.setCrop(0, 0, Math.ceil(arg0 * w), h);
   }
 }
