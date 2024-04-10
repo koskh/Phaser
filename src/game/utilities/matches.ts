@@ -6,12 +6,6 @@ const LEFT_VECTOR = [-1, 0];
 const UP_VECTOR = [0, 1];
 const DOWN_VECTOR = [0, -1];
 const VECTORS = [RIGHT_VECTOR, DOWN_VECTOR, LEFT_VECTOR, UP_VECTOR];
-// const PERPENDICULAR_VECTORS = [
-//   [RIGHT_VECTOR, DOWN_VECTOR],
-//   [DOWN_VECTOR, LEFT_VECTOR],
-//   [LEFT_VECTOR, UP_VECTOR],
-//   [UP_VECTOR, RIGHT_VECTOR],
-// ];
 
 export function hasMatches(grid: IGameGrid, initialGrid = GRID): boolean {
   const { ROWS: maxRows, COLUMNS: maxColumns } = initialGrid;
@@ -53,8 +47,6 @@ export function getRadiusMatches(
 
   const adjCells: IPositionInCell[] = squareCellsWithSelectCenter.filter(
     (p) => {
-      // debugger;
-
       return (
         Math.pow(tileX - p.tileX, 2) + Math.pow(tileY - p.tileY, 2) <=
         Math.pow(radius, 2) // Math.pow(radius + 0.5, 2)// TODO: need collaborate with QA
