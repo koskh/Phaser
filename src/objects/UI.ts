@@ -119,20 +119,53 @@ export default class UI extends Phaser.Scene {
     bombBtn.setInteractive({ useHandCursor: true });
     bombBtn.on('pointerup', () => gameManager.setBooster(EBoosterType.BOMB));
 
-    onEvent(EApplicationEvents.UPDATE_SCORE, (newScore: number) => {
-      scoreText.setText(`${newScore}`);
-      this.setProgressBar(newScore / WIN_SCORE);
-    });
-    onEvent(EApplicationEvents.UPDATE_TURNS, (newTurns: string) => {
-      turnText.setText(newTurns);
-    });
-    onEvent(EApplicationEvents.UPDATE_TURNS, (newTurns: string) => {
-      turnText.setText(newTurns);
-    });
+    onEvent(
+      EApplicationEvents.UPDATE_SCORE,
+      (newScore: number) => {
+        scoreText.setText(`${newScore}`);
+        this.setProgressBar(newScore / WIN_SCORE);
+      },
+      this,
+    );
+    onEvent(
+      EApplicationEvents.UPDATE_TURNS,
+      (newTurns: string) => {
+        turnText.setText(newTurns);
+      },
+      this,
+    );
+    onEvent(
+      EApplicationEvents.UPDATE_TURNS,
+      (newTurns: string) => {
+        turnText.setText(newTurns);
+      },
+      this,
+    );
+    onEvent(
+      EApplicationEvents.SET_BOOSTER,
+      (booster: EBoosterType | null) => {
+        this.activateBoosterBtn(booster);
+      },
+      this,
+    );
   }
 
   private setProgressBar(arg0: number) {
     const { width: w, height: h } = progressBarImg.texture.get();
     progressBarImg.setCrop(0, 0, Math.ceil(arg0 * w), h);
+  }
+
+  private activateBoosterBtn(booster: EBoosterType | null) {
+    switch (booster) {
+      case EBoosterType.TELEPORT:
+        teleportBtn.setScale(DEFAULT_SCALE + 0.1);
+        break;
+      case EBoosterType.BOMB:
+        bombBtn.setScale(DEFAULT_SCALE + 0.1);
+        break;
+      default:
+        teleportBtn.setScale(DEFAULT_SCALE);
+        bombBtn.setScale(DEFAULT_SCALE);
+    }
   }
 }

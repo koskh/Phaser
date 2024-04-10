@@ -5,6 +5,7 @@ const eventsCenter = new Events.EventEmitter();
 export enum EApplicationEvents {
   'UPDATE_SCORE',
   'UPDATE_TURNS',
+  'SET_BOOSTER',
 }
 
 export function onEvent(

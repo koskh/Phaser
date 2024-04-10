@@ -6,7 +6,6 @@ import {
   makeScaleAnimation,
 } from '../objects/utilities/animation';
 import {
-  DEFAULT_SCALE,
   EBoosterType,
   GRID,
   HAS_MINIMAL_ONCE_GAME,
@@ -19,8 +18,6 @@ import {
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 
-import UI, {bombBtn, teleportBtn} from '../objects/UI'; // TODO: refactor need. need UI event
-
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';
 import { EApplicationEvents, emitEvent } from '../eventsCenter';
@@ -28,7 +25,6 @@ import { EApplicationEvents, emitEvent } from '../eventsCenter';
 export let gameManager: GameManager;
 export default class GameManager {
   board: Board;
-  ui: UI;
   prevSelectedTile: Tile | null = null;
   currentBuster: EBoosterType | null = null;
   resets: number = INITIAL_RESETS;
@@ -132,23 +128,12 @@ export default class GameManager {
   };
 
   public setBooster(booster: EBoosterType | null) {
-    switch (booster) {
-      case EBoosterType.TELEPORT:
-        teleportBtn.setScale(DEFAULT_SCALE + 0.1);
-        break;
-      case EBoosterType.BOMB:
-        bombBtn.setScale(DEFAULT_SCALE + 0.1);
-        break;
-      default:
-        teleportBtn.setScale(DEFAULT_SCALE);
-        bombBtn.setScale(DEFAULT_SCALE);
-    }
     this.currentBuster = booster;
+    emitEvent(EApplicationEvents.SET_BOOSTER, booster);
   }
 
   private setPrevSelect(tile: Tile | null) {
     tile ? tile.setAlpha(0.5) : this.prevSelectedTile?.setAlpha(1);
-
     this.prevSelectedTile = tile;
   }
 
