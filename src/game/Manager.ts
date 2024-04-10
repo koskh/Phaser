@@ -19,7 +19,7 @@ import {
 import { deleteGridCells, swapVerticalTiles } from './utilities/swaps';
 import { tileToPosition } from './utilities/position';
 
-import UI, { bombBtn, teleportBtn } from '../objects/UI';
+import UI, {bombBtn, teleportBtn} from '../objects/UI'; // TODO: refactor need. need UI event
 
 import { gameScene } from '../scenes/GameScene';
 import { getScore } from './utilities/game';

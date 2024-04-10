@@ -132,7 +132,7 @@ export default class UI extends Phaser.Scene {
   }
 
   private setProgressBar(arg0: number) {
-    const {width: w, height: h} = progressBarImg.texture.get();
+    const { width: w, height: h } = progressBarImg.texture.get();
     progressBarImg.setCrop(0, 0, Math.ceil(arg0 * w), h);
   }
 }
